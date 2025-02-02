@@ -1,0 +1,384 @@
+<!--
+ - Created by Attila Nemeth @AttentionCRM on 23/08/15.
+ -->
+
+<!-- Trip Planner -->
+<template>
+    <template if:true={showIconInfoModal}>
+        <section role="dialog" aria-modal="true" class="slds-modal slds-fade-in-open"
+                 style="width: 1400px; height: 585px;">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium"
+                     style="height: 585px; box-shadow: 10px 25px 40px 15px rgba(0, 0, 0, 0.2), 10px 15px 40px 15px rgba(0, 0, 0, 0.18);">
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <lightning-icon icon-name="utility:moneybag" style="border: solid;"></lightning-icon>&nbsp;
+                        Moneybag - Annual revenue &gt; 100000000
+                    </p>
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <lightning-icon icon-name="utility:task" style="border: solid;"></lightning-icon>&nbsp;
+                        Open Task - TODO - this icon does nothing yet.
+                    </p>
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <lightning-icon icon-name="utility:jump_to_bottom" style="border: solid;"></lightning-icon>&nbsp;
+                        Fallback – TODO - this icon does nothing yet.
+                    </p>
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <lightning-icon icon-name="utility:high_velocity_sales" style="border: solid;"></lightning-icon>&nbsp;
+                        High potential sales – TODO - this icon does nothing yet.
+                    </p>
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <lightning-icon icon-name="utility:priority" style="border: solid;"></lightning-icon>&nbsp;
+                        Potential priority – Account Industry: Energy
+                    </p>
+                    <p style="padding-top: 10px; padding-bottom: 10px;">
+                        <lightning-icon icon-name="utility:notification_snoozed"
+                                        style="border: solid;"></lightning-icon>&nbsp;
+                        Inactive – TODO - this icon does nothing yet.
+                    </p>
+                    <hr style="margin-bottom: 2px; padding-bottom: 2px;"/>
+                    <div style="margin-top: 2px; margin-bottom: 2px; padding-top: 10px; text-align: center; vertical-align: center;">
+                        <lightning-button variant="brand" label="OK"
+                                          onclick={handleIconInfoModalOKClick}
+                                          style="vertical-align: center;"></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!--<template if:false={showIconInfoModal}>-->
+
+    <div class="map-modal" if:true={showMapModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                 aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={handleCloseMapModal}>
+                        <lightning-icon icon-name="utility:close"
+                                        onclick={handleCloseMapModal}
+                                        alternative-text="close"
+                                        variant="inverse"
+                                        size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Map</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-map if:false={mapModalSingleZoom} map-markers={mapMarkers}
+                                   center={userLocation}></lightning-map>
+                    <lightning-map if:true={mapModalSingleZoom} zoom-level={mapModalSingleZoomLevel}
+                                   map-markers={mapMarkers} center={userLocation}></lightning-map>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="brand" label="Close" onclick={handleCloseMapModal}
+                                      class="slds-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+
+
+    <c-confirmation-dialog title="Eheti összes esemény törlése"
+                           message="Biztosan törölni szeretné az összes eheti eseményt?"
+                           confirm-label="Yes"
+                           cancel-label="No"
+                           visible={showDeleteAllDialog}
+                           name="deleteAllModal"
+                           onmodalaction={handleClick}>
+    </c-confirmation-dialog>
+    <c-confirmation-dialog title="Események létrehozása"
+                           message="Biztosan létre szeretné hozni a tervezett eseményeket?"
+                           confirm-label="Igen"
+                           cancel-label="Nem"
+                           visible={showCreateEventsDialog}
+                           name="createEventsModal"
+                           onmodalaction={handleClick}>
+    </c-confirmation-dialog>
+    <div class="planner-container" id="plannerContainer">
+        <header class="planner-header">
+            <div class="header-icon-container">
+                <lightning-icon class="direction-icon" icon-name="utility:filter" alternative-text="Filters"
+                                title="Filter" onclick={handleFilterIconClick}
+                                size="medium"></lightning-icon>
+                <!--<lightning-icon class="direction-icon" icon-name="utility:settings" alternative-text={label.TP_Settings}
+                                title={label.TP_Settings} onclick={handleFilterIconClick}
+                                size="medium"></lightning-icon>-->
+            </div>
+
+            <!--            <div>-->
+            <!--                &nbsp;-->
+            <!--            </div>-->
+
+            <div class="direction-container">
+                <lightning-icon class="direction-icon" icon-name="utility:chevronleft"
+                                alternative-text="Previous week"
+                                title="Previous week" onclick={handlePreviousWeek}
+                                size="medium"></lightning-icon>
+                <lightning-icon class="direction-icon" icon-name="utility:chevronright"
+                                alternative-text="Next week"
+                                title="Next week" onclick={handleNextWeek} size="medium"></lightning-icon>
+                <!--                <div class = "date-text"> {startOfSelectedWeek} - {endOfSelectedWeek} </div>-->
+            </div>
+
+
+            <div class="button-container">
+                <!--                <div if:true={selectedAccountName}>-->
+                <!--                    <span>Kiválasztott:</span>&nbsp;-->
+                <!--                    <lightning-formatted-rich-text value={selectedAccountName}></lightning-formatted-rich-text>&nbsp;-->
+                <!--                </div>-->
+                <!--                <lightning-button if:true={selectedAccountName} variant="destructive" name="distanceButton" label={label.TP_Tavolsag}-->
+                <!--                                  onclick={handleDistanceClick}-->
+                <!--                                  disabled={isDistanceButtonDisabled}-->
+                <!--                                  class="slds-m-left_x-small"></lightning-button>-->
+                <!--                <lightning-button if:false={selectedAccountName} variant="brand" name="distanceButton" label={label.TP_Tavolsag}-->
+                <!--                                  onclick={handleDistanceClick}-->
+                <!--                                  disabled={isDistanceButtonDisabled}-->
+                <!--                                  class="slds-m-left_x-small"></lightning-button>-->
+                <lightning-button variant="brand" name="distanceButton" label="Distances"
+                                  onclick={handleDistanceClick}
+                                  disabled={isDistanceButtonDisabled}
+                                  class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="brand" name="createEventsButton" label="Next"
+                                  onclick={handleNextButtonClick} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </header>
+        <!--        <div class="planner-toolbar">-->
+        <!--                            <div class="combobox-section">-->
+        <!--                                <lightning-input-->
+        <!--                                        value={searchWord}-->
+        <!--                                        onchange={handleWordSearch}-->
+        <!--                                        label = "Keresés"-->
+        <!--                                        placeholder="Név/Város">-->
+        <!--                                </lightning-input>-->
+        <!--                            </div>-->
+        <!--                        <div class = "checkbox-container">-->
+        <!--                                <div>-->
+        <!--                                    <lightning-input type="checkbox" label="Összes Ügyfél"  onchange={handleAllAccountsButton}></lightning-input>-->
+        <!--                                    &lt;!&ndash;                                    <lightning-button variant={buttonVariant} label="Összes patika" onclick={handleAllAccountsButton} class="slds-m-left_x-small"></lightning-button>&ndash;&gt;-->
+        <!--                                </div>-->
+        <!--                                <div>-->
+        <!--                                    <lightning-input type="checkbox" label="Saját Ügyfelek"  checked></lightning-input>-->
+        <!--                                </div>-->
+        <!--                        </div>-->
+        <!--                        <div class = "icon-container">-->
+        <!--                            <template for:each= {icons} for:item="icon" for:index="index">-->
+        <!--                                    <lightning-icon data-index = {index} class = "clickable-icon" key = {icon.icon_name} icon-name={icon.icon_name} alternative-text={icon.display_name} title={icon.display_name} style = {icon.style} onclick = {handleIconClick} size = "small"></lightning-icon>-->
+        <!--                            </template>-->
+        <!--                        </div>-->
+        <!--                        <div class = "date-container">-->
+        <!--                            <lightning-input type="date" name="input2" label="Hét" value={startOfSelectedWeek} onchange = {handleDateChange}></lightning-input>-->
+        <!--                        </div>-->
+        <!--                        <div class = "date-container">-->
+        <!--                            <lightning-combobox-->
+        <!--                                    name="type"-->
+        <!--                                    style = "width : 200px;"-->
+        <!--                                    label="Látogatás típus"-->
+        <!--                                    value={selectedType}-->
+        <!--                                    placeholder="Válasszon..."-->
+        <!--                                    options={typeOptions}-->
+        <!--                                    onchange={handleTypeChange} ></lightning-combobox>-->
+        <!--                        </div>-->
+        <!--                        <div class = "distance-container">-->
+        <!--&lt;!&ndash;                            <div class = "selected-account-box">&ndash;&gt;-->
+        <!--&lt;!&ndash;                                    Kiválasztott ügyfél: &ndash;&gt;-->
+        <!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+        <!--                            <div class = "show-distance-container">-->
+        <!--                                <lightning-button variant="brand" label="Távolság számítás" title="Calculate Distance"  class="slds-m-left_x-small"></lightning-button>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--        </div>-->
+        <lightning-spinner if:true={globalSpinner} alternative-text="Loading ..."></lightning-spinner>
+        <div class="planner-main" if:false={globalSpinner}>
+            <div id="filterSidebar" class="filter-sidebar">
+                <div class="filter-section">
+                    <lightning-accordion allow-multiple-sections-open>
+
+                        <!--                        <lightning-formatted-rich-text title="Region filter is not available in this version. "-->
+                        <!--                                                       value="Region filter is not available in this version. ">Region-->
+                        <!--                            filter is not available in this version.-->
+                        <!--                        </lightning-formatted-rich-text>-->
+                        <!--                        <lightning-accordion-section class="filter-menu-item" name="Area" label={label.TP_Telep}>
+                                                    <lightning-checkbox-group name="Region" label=""
+                                                                              options={regionOptions}
+                                                                              value={selectedRegions}
+                                                                              onchange={handleRegionChange}>
+                                                    </lightning-checkbox-group>
+                                                </lightning-accordion-section>-->
+
+                        <lightning-accordion-section class="filter-menu-item" name="Types"
+                                                     label="Filter by Types">
+                            <lightning-checkbox-group name="Types" label=""
+                                                      options={typesOptions}
+                                                      value={selectedAccTypes}
+                                                      onchange={handleAccTypeChange}>
+                            </lightning-checkbox-group>
+                        </lightning-accordion-section>
+
+<!--                        <lightning-accordion-section class="filter-menu-item" name="ShippingCity"
+                                                     label="Filter 2 ">
+                            <lightning-checkbox-group name="ShippingCity" label=""
+                                                      options={ASCGroupOptions}
+                                                      value={selectedASCGroups}
+                                                      onchange={handleASCGroupChange}>
+                            </lightning-checkbox-group>
+                        </lightning-accordion-section>-->
+
+<!--                        <lightning-accordion-section class="filter-menu-item" name="BillingCity"
+                                                     label="Filter 3 ">
+                            <lightning-checkbox-group name="BillingCity" label=""
+                                                      options={ASCGroupOptions}
+                                                      value={selectedASCGroups}
+                                                      onchange={handleASCGroupChange}>
+                            </lightning-checkbox-group>
+                        </lightning-accordion-section>-->
+
+                        <lightning-accordion-section class="filter-menu-item" name="Account Category"
+                                                     label="Account category">
+                            <div class="icon-container">
+                                <template for:each={icons} for:item="icon" for:index="index">
+                                    <lightning-icon data-index={index} class="clickable-icon" key={icon.icon_name}
+                                                    icon-name={icon.icon_name} alternative-text={icon.display_name}
+                                                    title={icon.legend} style={icon.style}
+                                                    onclick={handleIconClick} size="small"></lightning-icon>
+                                </template>
+                            </div>
+                            <div>
+                                <p>&nbsp;</p>
+                                <!--<p>&nbsp;</p>-->
+                                <lightning-button variant="neutral" icon-name="utility:info_alt"
+                                                  title="Icon info"
+                                                  label="What do the icons filter?"
+                                                  onclick={handleIconInfoButtonClick}
+                                                  class="slds-m-left_xxx-small"
+                                                  style="padding-top: 20px;"></lightning-button>
+
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section class="filter-menu-item" name="Owner" label="Owner">
+                            <lightning-radio-group name="owner" label=""
+                                                   options={ownerOptions}
+                                                   value={selectedOwner}
+                                                   type="radio"
+                                                   onchange={handleOwnerRadioButtonSelectedChange}>
+                            </lightning-radio-group>
+                        </lightning-accordion-section>
+
+                        <!-- account LIMIT Slider: -->
+                                                <lightning-accordion-section class="filter-menu-item" name="Slider"
+                                                                             label="Account limit">
+                                                    <lightning-slider
+                                                            label="Limit account count to max:"
+                                                            size="x-small"
+                                                            min={sliderMin}
+                                                            step={sliderStep}
+                                                            max={sliderMax}
+                                                            value={tooManyAccountsLimit}
+                                                            onchange={handleLimitSliderChange}
+                                                            class="slds-slider"
+                                                    ></lightning-slider>
+                                                </lightning-accordion-section>
+                    </lightning-accordion>
+                </div>
+                <div class="filter-button-section">
+                    <lightning-button variant="brand" name="filterButton" label="Remove filters"
+                                      onclick={handleRemoveFiltersButton}
+                                      class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+            <div class="accounts-column">
+                <div class="accounts-column-header">
+                    <div class="combobox-section">
+                        <lightning-input
+                                value={searchWord}
+                                onchange={handleWordSearch}
+                                label="Search"
+                                placeholder="Name or city ... ">
+                        </lightning-input>
+                    </div>
+                </div>
+                <!--                <div class="accounts-column-label">-->
+                <!--                    Ügyfelek-->
+                <!--                </div>-->
+                <div class="item-list-container">
+                    <p if:true={areTooManyAccounts}>Too many loaded accounts!</p>
+                    <!--<p>Szűrt/Összes: {filteredAccountsLength}/{countOfAllRelatedAccounts}</p>-->
+                    <p>Filtered/All: {filteredAccountsRealLength}/{countOfAllRelatedAccounts}</p>
+                    <!--<p>Szűrt Account-ok száma: {filteredAccountsRealLength}</p>-->
+                    <lightning-spinner if:true={filteredSpinner}
+                                       alternative-text="Loading ..."></lightning-spinner>
+                    <template if:false={areTooManyAccounts}>
+
+                        <c-trip-planner-drag-and-drop if:false={filteredSpinner}
+                                                      onselect={displayDistances}
+                                                      onchange={handleAccountsChange}
+                                                      onselectaccount={handleAccountSelect}
+                                                      scroll-mode={scrollMode}
+                                                      device={device}
+                                                      mainpanel="true"
+                                                      items={filteredAccounts}
+                                                      group="1"
+                                                      type="account"
+                        ></c-trip-planner-drag-and-drop>
+                    </template>
+                </div>
+            </div>
+
+            <div class="calendar">
+                <template for:each={days} for:item="day">
+                    <div key={day.Id} class="calendar-day">
+                        <div class="calendar-day-header">
+                            <div class="calendar-day-name" onclick={handleMapModalButtonClick}
+                                 ontouch={handleMapModalButtonClick} data-day-id={day.Id}>{day.dayName}
+                                ({day.visitCount})
+                            </div>
+                            <div><b>{day.displayDate}</b></div>
+                        </div>
+                        <div class="calendar-day-accounts">
+                            <div class="drag-drop-box">
+                                <c-trip-planner-drag-and-drop
+                                        onselect={displayDistances}
+                                        oncomboboxchange={handleComboboxChange}
+                                        onselectaccount={handleAccountSelect}
+                                        data-day-id={day.Id}
+                                        selected-subtype={selectedSubType}
+                                        device={device}
+                                        mainpanel="false"
+                                        onchange={handleAccountsChange}
+                                        items={day.accounts}
+                                        group="1"
+                                        type="event"
+                                ></c-trip-planner-drag-and-drop>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <footer class="planner-footer">
+            <div class="footer-legend">
+                <div class="icon-container-footer">
+                    <template for:each={icons} for:item="icon" for:index="index">
+                        <lightning-icon style="margin-left : 15px;" data-index={index} class="clickable-icon"
+                                        key={icon.icon_name} icon-name={icon.icon_name}
+                                        alternative-text={icon.display_name} title={icon.legend}
+                                        onclick={handleIconClick} size="x-small"></lightning-icon>
+                        - {icon.legend}
+                    </template>
+                    <!--<p>before lightning-button-icon</p>-->
+                    <!--<lightning-button-icon icon-name="utility:info_alt" title="Mire is szűrnek az ikonok?" onclick={handleIconInfoButtonClick}></lightning-button-icon>-->
+                    <!--<p>after lightning-button-icon</p>-->
+                </div>
+            </div>
+            <div class="show-legend-container">
+                <!--<lightning-button variant="neutral" icon-name="utility:info_alt" title="Mire is szűrnek az ikonok?" onclick={handleIconInfoButtonClick} class="direction-icon slds-m-left_xxx-small"></lightning-button> &nbsp;-->
+                <lightning-icon class="direction-icon" icon-name="utility:info" alternative-text="Legend"
+                                title="Legend"
+                                onclick={handleFooterIconClock} size="xx-small"></lightning-icon>
+            </div>
+        </footer>
+    </div>
+
+    <!--</template>-->
+</template>

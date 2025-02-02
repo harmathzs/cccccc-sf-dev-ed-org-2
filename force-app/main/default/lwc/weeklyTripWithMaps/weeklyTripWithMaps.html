@@ -1,0 +1,84 @@
+<!--
+ - Created by Attila Nemeth @ Attention CRM on 2023. 09. 05.
+ -->
+
+<!-- Weekly Trip With Maps -->
+<template>
+    <div class="weekly-trips-container">
+        <div class="toolbar-container">
+            <div>
+                <lightning-combobox
+                        style="width : 200px"
+                        label="User"
+                        value={selectedOwner}
+                        placeholder="Pick a user ... "
+                        options={userOptions}
+                        onchange={handleOwnerChange}>
+                </lightning-combobox>
+            </div>
+
+            <div class="date-container">
+                <lightning-input type="date" name="input2" label="Start of week" value={startOfSelectedWeek}
+                                 onchange={handleDateChange}></lightning-input>
+            </div>
+
+            <div>
+                <lightning-button variant="brand" name="listItemButton" label="Search"
+                                  onclick={handleListItems} disabled={isListButtonDisabled}
+                                  class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template if:false={isLoading}>
+            <template if:false={noVisitsForFilter}>
+                <div class="main-container">
+                    <template for:each={daysOfWeek} for:item="day">
+                        <div key={day.dayIndex} class="day-container">
+                            <div key={day.dayIndex} class="day-header">{day.dayName}</div>
+                            <template if:true={day.hasVisits}>
+                                <div class="day-table">
+                                    <div key={day.dayIndex}>
+                                        <lightning-datatable
+                                                key={day.dayIndex}
+                                                key-field="id"
+                                                data={day.visits}
+                                                columns={columns}
+                                                onrowaction={handleRowAction}
+                                                hide-checkbox-column="true">
+                                        </lightning-datatable>
+                                    </div>
+                                    <div key={day.dayIndex} class="map-container">
+                                        <!--<p data-day={day}>getZoomLevel: {getZoomLevel(day)}</p>-->
+                                        <template if:true={day.mapMarkers}>
+                                            <lightning-map if:true={day.zoomLevel} class="width : 100%" options={mapOptions}
+                                                           list-view="visible" map-markers={day.mapMarkers} data-day={day}
+                                                           zoom-level={day.zoomLevel}></lightning-map>
+                                            <lightning-map if:false={day.zoomLevel} class="width : 100%"
+                                                           options={mapOptions} list-view="visible"
+                                                           map-markers={day.mapMarkers} data-day={day}></lightning-map>
+                                        </template>
+                                        <!---->
+                                        <!-- zoom-level={getZoomLevel} -->
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:false={day.hasVisits}>
+                                <div key={day.dayIndex} class="no-visit-text-container">
+                                    No visit.
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={noVisitsForFilter}>
+                <div class="no-match-container">
+                    {displayTextMessage}
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,63 @@
+<!--
+ - Created by Attila Nemeth @Attention CRM on 22/12/05.
+ -->
+
+<!-- Trip Planner Drag And Drop -->
+<template>
+    <div class="drag-drop-container" style={styleOfContainer} tabindex="-1">
+        <lightning-spinner variant="brand" if:true={isLoading} alternative-text="Loading"></lightning-spinner>
+        <h3 if:true={label}>{label}</h3>
+        <div class="item-container">
+            <div if:false={_items.length} class="placeholder">
+                {placeholder}
+            </div>
+            <template for:each={_items} for:item="item" for:index="index">
+                <div key={item._dragDropItemId} class={item._dragAndDropStyleClass}
+                     data-item-id={item._dragDropItemId} data-index={index} data-account-id={item.Id}
+                     onmousedown={handleItemMouseDown}
+                     oncontextmenu={handleContextMenu}
+                     ontouchstart={handleItemTouchStart}
+                     onclick={handleItemClick}
+                     style={item.style}>
+                    <div class = "inner-box">
+                        <div class = "left-box">
+                            <template if:true={item.displayName}>
+                                <div class="account-title" ontouchstart={handleDragIconOnTouchStart}
+                                     ontouchend={handleDragIconOnTouchEnd}>{item.displayName}
+                                </div>
+                                <span if:true={item.ShippingCity} style="font-size : 11px">{item.ShippingCity}&nbsp;</span>
+                                <span if:false={item.ShippingCity} if:true={item.BillingCity} style="font-size : 11px">{item.BillingCity}&nbsp;</span>
+
+                                <span if:true={item.distanceFromCurrent}>{item.distanceFromCurrent} km</span>
+
+                                <!--                        <lightning-icon if:false={isDesktop} icon-name="utility:expand" size="x-small"-->
+                                <!--                                        onclick = {handleDragIconOnTouchStart} ontouchstart={handleDragIconOnTouchStart} ontouchend = {handleDragIconOnTouchEnd} data-account-id={item.Id} class="slds-m-around_xx-small"></lightning-icon>-->
+                            </template>
+                            <template if:false={item.displayName}>
+                                <div>
+                                    <div class="account-title" style="display: inline-block"
+                                         ontouchstart={handleDragIconOnTouchStart} ontouchend={handleDragIconOnTouchEnd}
+                                         data-account-id={item.Id} onclick={goToAccount} ontouch={goToAccount}>
+                                        <p if:true={item.Name}>
+                                            <u>{item.Name}</u>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span if:true={item.ShippingCity} style="font-size : 11px">{item.ShippingCity}&nbsp;</span>
+                                <span if:false={item.ShippingCity} if:true={item.BillingCity} style="font-size : 11px">{item.BillingCity}&nbsp;</span>
+                                <!--                        <p if:true={item.displayDate}>{item.displayDate}</p>-->
+                                <span if:true={item.distanceFromCurrent}>({item.distanceFromCurrent} km)</span>
+                            </template>
+                        </div>
+                        <div class = "icon-box">
+                            <template for:each= {item.icons} for:item="icon" for:index="index">
+                                <lightning-icon key = {icon.icon_name} icon-name={icon.icon_name} alternative-text={icon.icon_name} title={icon.display_name} size = "x-small"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div class="item-place-holder" style="display: none;"></div>
+        </div>
+    </div>
+</template>
