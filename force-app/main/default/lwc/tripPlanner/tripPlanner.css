@@ -1,0 +1,376 @@
+* {
+    box-sizing: border-box;
+}
+
+.header_text {
+    font-size: 32px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.planner-container {
+    display: flex;
+    width: 100%;
+    min-height: 580px;
+    height: 100%;
+    flex-direction: column;
+    background-color: white;
+    border: 2px solid black;
+    justify-content: space-between;
+    /*padding: 6px;*/
+}
+
+/*.planner-header {
+    text-align: center;
+    flex: 0;
+    font-size: 16px;
+}*/
+
+.planner-main {
+    display: flex;
+    flex: 1;
+    max-height: 40rem;
+    overflow: hidden;
+}
+
+.planner-footer {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid black;
+    background-color: #f3f3f3;
+    padding: 5px 10px;
+    margin-top: 5px;
+    /*background-color : lightgray;*/
+}
+
+
+.footer-legend {
+    margin-top: 10px;
+    height: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    transition: 0.5s;
+}
+
+.icon-container-footer {
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.clickable-icon {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 0.1rem;
+}
+
+.planner-toolbar {
+    justify-content: space-around;
+    flex-direction: row;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.planner-header {
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    padding: 5px 30px 5px 5px;
+    background-color: #F1F1F1;
+    border-bottom: 1px solid black;
+}
+
+.direction-icon {
+    cursor: pointer;
+    padding: 0.1rem;
+}
+
+.direction-icon:hover {
+    cursor: pointer;
+    padding: 0.1rem;
+    background-color: lightblue;
+    /*background-color: #0c5caa;*/
+    /*background-color: #add8e6;*/
+}
+
+.direction-container {
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /*width: 33%;*/
+}
+
+.date-text {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.header-icon-container {
+    /*width: 20%;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.button-container {
+    /*width: 33%;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.show-legend-container {
+    justify-content: flex-end;
+    flex-direction: row;
+    display: flex;
+}
+
+.checkbox-container {
+
+}
+
+.date-container {
+
+}
+
+.icon-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: center;
+    gap: 20px;
+
+    /*padding-bottom: 20px;*/
+}
+
+.distance-container {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-account-box {
+
+}
+
+.show-distance-container {
+
+}
+
+.show-distance-button {
+    background-color: blue;
+}
+
+
+.slds-modal__container {
+    width: 70% !important;
+    max-width: 70% !important;
+}
+
+.filter-form {
+    display: flex;
+    padding: 1rem;
+    gap: 2px;
+}
+
+.accounts-column-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #F1F1F1;
+}
+
+.accounts-column {
+    width: 15rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 5px;
+    /*border: 2px solid black;
+    border-radius: 20px;*/
+}
+
+
+.item-list-container {
+    width: 100%;
+    max-height: 50%;
+}
+
+.account-row {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.calendar {
+    flex-grow: 1;
+    display: flex;
+}
+
+.accounts-column-label,
+.calendar-day-header {
+    display: flex;
+    text-align: center;
+    min-width: 104px;
+    flex-direction: column;
+}
+
+.calendar-day-name {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.calendar-day {
+    flex: 1;
+}
+
+.calendar-day-accounts {
+    display: flex;
+    justify-content: center;
+}
+
+.drag-drop-box {
+    width: 90%;
+}
+
+.combobox-section {
+    display: flex;
+    padding: 6px 6px 0 6px;
+    text-align: center;
+}
+
+.highlighted {
+    filter: brightness(120%);
+}
+
+.toggle-button {
+    width: 100px;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+.filter-section {
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /*background-color: white;*/
+    background-color: #f3f3f3;
+}
+
+.last-visit-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.date-text-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: center;
+    gap: 10px;
+}
+
+.date-input-container {
+
+}
+
+.filter-button-section {
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid black;
+    background-color: #f3f3f3;
+}
+
+.filter-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 0;
+    min-width: 0;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F1F1F1;
+    overflow-x: hidden;
+    transition: 0.5s;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+    resize : horizontal;
+    max-width : 500px;
+}
+
+.filter-sidebar a:hover {
+    color: lightgray;
+}
+
+.slds-slider {
+    padding: 5px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.iconinfomodalbackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconinfomodalcontent {
+    background-color: #fff; /* white background for the modal */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* box shadow for a subtle lift effect */
+
+}
+
+.accordion-inner-container{
+    background-color: white;
+    padding: 10px;
+    margin: -5px -15px -11px -15px;
+    border-top: 1px solid lightgray;
+}
+
+.filter-menu-item{
+    background-color : #F3F3F3;
+    /*border-bottom : 1px solid lightgray;*/
+}

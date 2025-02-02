@@ -1,0 +1,108 @@
+/**
+ * Created by Attila Nemeth @Attention CRM on 22/12/05.
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+.account-title {
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.account-text {
+    font-size: 8px;
+}
+
+.drag-drop-container {
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+    max-height: 150%;
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.item-container {
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    width: 100%;
+    min-height: 2rem;
+    max-height: 30rem;
+    overflow: hidden;
+    overflow-y: auto;
+    /*height: 100%;
+    overflow: auto;
+    flex: 1;*/
+}
+
+.item-container.active {
+    /*border: 1px solid var(--lwc-colorBorderBrand, #1b96ff);*/
+    border: 1px solid var(--lwc-colorBorderBrand, #add8e6);
+    border-radius: 5px;
+}
+
+/*.item {
+    user-select: none;
+    min-height: 2rem;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px solid var(--lwc-colorBorder, #e5e5e5);
+    background-color: var(--lwc-colorBackground, #f3f3f3);
+}*/
+
+.item {
+    user-select: none;
+    min-height: 2rem;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(24, 24, 24);
+    background-color: var(--lwc-colorBackground, #f3f3f3);
+}
+
+.placeholder {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.item.selected.main {
+    opacity: 1;
+    /*border-color: var(--lwc-colorBorderBrand, #1b96ff);*/
+    border-color: var(--lwc-colorBorderBrand, #add8e6);
+}
+
+.item.selected {
+    opacity: 0.5;
+    z-index: 99999;
+}
+
+.inner-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-box{
+
+}
+
+.icon-box{
+    display: flex;
+    align-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+    gap : 3px;
+}

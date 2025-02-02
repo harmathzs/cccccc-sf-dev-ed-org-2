@@ -1,0 +1,64 @@
+<!--
+ - Created by Attila Nemeth @AttentionCRM on 23/08/22.
+ -->
+
+<!-- Trip Planner Event Editor Popup -->
+<template>
+    <lightning-modal-header label="Edit Events"></lightning-modal-header>
+    <lightning-modal-body>
+        <div class = "toolbar-container">
+<!--            <div class="day-name-container">
+
+            </div>-->
+            <div>
+                <lightning-formatted-text value="Visit type: "></lightning-formatted-text>
+                <lightning-combobox
+                        style="width: 300px; display: flex;align-content: center;flex-direction: row;"
+                        name="visittype"
+                        value={selectedVisitType}
+                        placeholder="Látogatás típusa"
+                        options={visitTypeOptions}
+                        onchange={handleVisitTypeChange}>
+                </lightning-combobox>
+            </div>
+            <div>
+                <lightning-button variant="brand" name="setTypeButton" label="Set type"
+                                  onclick={handleSetType} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </div>
+        <div class = "main-table-container">
+            <template for:each={dayEvents} for:item="day">
+                <div class = "day-column" key = {day.Id}>
+                    <div class = "day-name-container" key = {day.Id}>
+                        {day.dayName}
+                    </div>
+                    <div class = "day-visits-container" key = {day.Id}>
+                        <template for:each={day.accounts} for:item="account">
+                            <div class = "visit-box" key = {account.randomId}>
+                                <div class = "visit-box-upper" key = {account.randomId}>
+                                    {account.Name}
+                                </div>
+                                <div class = "visit-box-lower" key = {account.randomId}>
+                                    <div class = "visit-box-type-container" key = {account.randomId}>
+                                        {account.visitType}
+                                    </div>
+                                    <div class = "visit-box-checkbox-container" key = {account.randomId}>
+                                        <template if:false={account.specialEvent}>
+                                            <input type="checkbox" class = "larger-checkbox" id={account.randomId} name={account.randomId} data-account-id={account.randomId} onchange={handleSelect}>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <div class = "footer-container">
+            <lightning-button variant="neutral" label="Back" onclick={handleBack}></lightning-button>
+            <lightning-button variant="brand" label="Plan week" onclick={handlePlanWeek}></lightning-button>
+        </div>
+    </lightning-modal-footer>
+</template>
