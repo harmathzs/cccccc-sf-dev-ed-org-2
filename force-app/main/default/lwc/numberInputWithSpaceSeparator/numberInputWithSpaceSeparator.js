@@ -7,7 +7,7 @@ import USER_ID from '@salesforce/user/Id';
 import { getRecord } from 'lightning/uiRecordApi';
 
 export default class NumberInputWithSpaceSeparator extends LightningElement {
-	@wire(getRecord, { recordId: USER_ID, fields: ['User.Name', 'User.LanguageLocaleKey'] })
+	@wire(getRecord, { recordId: USER_ID, fields: ['User.Name', 'User.LanguageLocaleKey', 'User.LocaleSidKey'] })
 	userDetails;
 
 	@api value;
@@ -24,10 +24,10 @@ export default class NumberInputWithSpaceSeparator extends LightningElement {
 
 	get formattedValue() {
 		console.log('userDetails.data', this.userDetails.data);
-		const languageLocaleKey = this.userDetails.data?.fields?.LanguageLocaleKey?.value;
-		console.log('languageLocaleKey', languageLocaleKey);
+		const LocaleSidKey = this.userDetails.data?.fields?.LocaleSidKey?.value;
+		console.log('LocaleSidKey', LocaleSidKey);
 
-		const sep = ((this.language && this.language.toLowerCase().includes('hu')) || (languageLocaleKey && languageLocaleKey.toLowerCase().includes('hu'))) ? ' ' : ',';
+		const sep = ((this.language && this.language.toLowerCase().includes('hu')) || (LocaleSidKey && LocaleSidKey.toLowerCase().includes('hu'))) ? ' ' : ',';
 		console.log('formattedValue, thousand separator character: "'+sep+'"')
 		return this.formatNumber(this.value, sep);
 	}
