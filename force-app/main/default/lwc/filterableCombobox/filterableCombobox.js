@@ -1,5 +1,5 @@
 /**
- * Created by Harmath Zsolt on 2025. 02. 03..
+ * Created by Harmath Zsolt on 2025. 02. 03.
  */
 
 import {api, LightningElement} from 'lwc';
@@ -12,7 +12,7 @@ export default class FilterableCombobox extends LightningElement {
 	@api label;
 	@api required = false;
 	@api disabled = false;
-	@api placeholder = select_an_option;
+	@api placeholder = 'Select an option';
 
 	displayedOptions = [];
 	searchText = '';
@@ -259,7 +259,7 @@ export default class FilterableCombobox extends LightningElement {
 
 	get computedPlaceholder() {
 		if (this.isDropdownOpened) {
-			return start_typing_to_search;
+			return 'Start typing to search';
 		}
 		return this.placeholder;
 	}
@@ -267,7 +267,7 @@ export default class FilterableCombobox extends LightningElement {
 	@api reportValidity() {
 		this.errorMessage = null;
 		if (this.required === true && this._options.find(e => e.value === this._value) == null) {
-			this.errorMessage = complete_this_field;
+			this.errorMessage = 'Complete this field';
 		}
 	}
 
