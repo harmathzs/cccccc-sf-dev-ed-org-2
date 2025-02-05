@@ -5,9 +5,11 @@
 <!-- Filterable Combobox with values -->
 <template>
 	<lightning-card>
-		<c-filterable-combobox label="Some label"
-							   options={options}
-							   value={value}
-							   onchange={handleChange}></c-filterable-combobox>
+		<div class="slds-p-around_small">
+			<c-filterable-combobox label="Filterable combobox Label"
+								   options={options}
+								   value={value}
+								   onchange={handleChange}></c-filterable-combobox>
+		</div>
 	</lightning-card>
 </template>
