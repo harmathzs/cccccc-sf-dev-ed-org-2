@@ -2845,6 +2845,7 @@ public with sharing class StoreVisitTripPlannerController {
   public static String getCachedDistances() {
     Boolean cacheExists = false;
     Map<String, List<DistanceBetweenTwoCities>> results = new Map<String, List<DistanceBetweenTwoCities>>();
+	  /*
     Cache.OrgPartition orgPartition = Cache.Org.getPartition(
       'CacheForTripPlanner'
     );
@@ -2876,6 +2877,8 @@ public with sharing class StoreVisitTripPlannerController {
         }
       }
     }
+
+	   */
     return JSON.serialize(results);
   }
 
