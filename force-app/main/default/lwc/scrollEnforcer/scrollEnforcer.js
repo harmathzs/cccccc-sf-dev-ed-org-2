@@ -7,8 +7,8 @@ import {api, LightningElement} from 'lwc';
 export default class ScrollEnforcer extends LightningElement {
 
 	labels = {
-		I_Reject: 'Elutasítom',
-		I_acknowledged: 'Elfogadom',
+		I_Reject: 'Accept',
+		I_acknowledged: 'Reject',
 	}
 
 	@api label;
