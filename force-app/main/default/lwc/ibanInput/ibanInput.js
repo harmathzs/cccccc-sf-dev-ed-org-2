@@ -31,11 +31,11 @@ export default class IbanInput extends NavigationMixin(LightningElement) {
 	showError = false;
 
 	labels = {
-		Cancel,
-		Next
+		Cancel: 'Cancel',
+		Next: 'Next'
 	};
-	DXP_But_you_typed = DXP_But_you_typed;
-	DXP_comma_Only = DXP_comma_Only;
+	DXP_But_you_typed = 'but you typed';
+	DXP_comma_Only = ')';
 
 	ibanTable =
 		[
@@ -195,7 +195,7 @@ export default class IbanInput extends NavigationMixin(LightningElement) {
 			// User did not start iban with country code!
 			const event = new ShowToastEvent({
 				title: 'Error',
-				message: DXP_Country_Code_not_found_in_IBAN,
+				message: 'Country Code Not Found in IBAN',
 				variant: 'error',
 			});
 			if (toastIfError) {
@@ -265,9 +265,9 @@ export default class IbanInput extends NavigationMixin(LightningElement) {
 
 	get incorrectLengthMessage() {
 		if (this.ibanLength > this.noSpacesIban?.length) {
-			return `${DXP_Incorrect_IBAN_length} ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}${this.DXP_comma_Only}.`;
+			return `Incorrect IBAN Length ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}${this.DXP_comma_Only}.`;
 		} else {
-			return `${DXP_Incorrect_IBAN_length} ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}).`;
+			return `Incorrect IBAN Length ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}).`;
 		}
 	}
 
