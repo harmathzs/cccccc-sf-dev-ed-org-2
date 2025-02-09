@@ -11,7 +11,22 @@ export default class CurrencyRates extends LightningElement {
 	base = 'EUR';
 	symbols;
 
+	connectedCallback() {
+		this.loadSupportedSymbols();
+	}
+
+	loadSupportedSymbols() {
+		fetch('https://data.fixer.io/api/symbols?access_key='+this.apiKey)
+			.then(res => res.json())
+			.then(json => this.supportedSymbols = json)
+			.catch(err => console.log(err))
+			.finally(() => {
+				console.log('loadSupportedSymbols supportedSymbols', this.supportedSymbols);
+			});
+	}
+
 	handleEndpointChange(event) {
-		console.log('handleEndpointChange event', event);
+		//console.log('handleEndpointChange event', event);
+		this.endpoint = event?.detail?.value;
 	}
 }
