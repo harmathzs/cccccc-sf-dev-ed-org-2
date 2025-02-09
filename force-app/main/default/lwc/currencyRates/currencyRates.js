@@ -22,6 +22,11 @@ export default class CurrencyRates extends LightningElement {
 			.catch(err => console.log(err))
 			.finally(() => {
 				console.log('loadSupportedSymbols supportedSymbols', this.supportedSymbols);
+				// {
+				//     "success": true,
+				//     "symbols": {
+				//         "AED": "United Arab Emirates Dirham",
+				//         "AFN": "Afghan Afghani",
 			});
 	}
 
