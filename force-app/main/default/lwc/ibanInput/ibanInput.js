@@ -34,7 +34,7 @@ export default class IbanInput extends NavigationMixin(LightningElement) {
 		Cancel: 'Cancel',
 		Next: 'Next'
 	};
-	DXP_But_you_typed = 'but you typed';
+	DXP_But_you_typed = 'but you have typed';
 	DXP_comma_Only = ')';
 
 	ibanTable =
@@ -265,9 +265,9 @@ export default class IbanInput extends NavigationMixin(LightningElement) {
 
 	get incorrectLengthMessage() {
 		if (this.ibanLength > this.noSpacesIban?.length) {
-			return `Incorrect IBAN Length ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}${this.DXP_comma_Only}.`;
+			return `Incorrect IBAN Length. Correct = ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}${this.DXP_comma_Only}.`;
 		} else {
-			return `Incorrect IBAN Length ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}).`;
+			return `Incorrect IBAN Length. Correct = ${this.ibanLength} (${this.DXP_But_you_typed} ${this.noSpacesIban?.length}).`;
 		}
 	}
 
