@@ -1,5 +1,5 @@
 <!--
- - Created by Harmath Zsolt on 2025. 02. 10..
+ - Created by Harmath Zsolt on 2025. 02. 10.
  -->
 
 <!-- AI Chat -->
@@ -9,8 +9,35 @@
 			<div class="upper-content-region">
 				xxx
 			</div>
-			<div id="lower-content-region">
-				yyy
+			<div id="lower-content-region" onkeypress={handleKeyPress}>
+				<lightning-layout vertical-align="end">
+					<lightning-layout-item size="10">
+						<lightning-input
+							label="Ask new question"
+							value={question}
+							onchange={handleInputChange}
+						>
+						</lightning-input>
+					</lightning-layout-item>
+					<lightning-layout-item size="1">
+						<lightning-button-icon
+							icon-name="utility:send"
+							onclick={handleSendClick}
+							variant="bare"
+							size="large"
+						>
+						</lightning-button-icon>
+					</lightning-layout-item>
+					<lightning-layout-item size="1">
+						<lightning-button-icon
+							icon-name="action:reset_password"
+							onclick={handleResetClick}
+							variant="bare"
+							size="large"
+						>
+						</lightning-button-icon>
+					</lightning-layout-item>
+				</lightning-layout>
 			</div>
 		</div>
 	</lightning-card>
