@@ -6,10 +6,20 @@ import {LightningElement} from 'lwc';
 
 export default class CurrencyRates extends LightningElement {
 	apiKey = '5007bbeac86574994088d4021dac9a12';
+	base;
 	supportedSymbols;
 	symbolOptions;
 	symbols;
 	ratesToEUR;
+
+	columns = [
+		{label: 'Currency Abbreviation', fieldName: 'abbr'},
+		{label: 'Conversion Rate to EUR', fieldName: 'rateToEUR'},
+	];
+	data = [
+		{abbr: 'HUF', rateToEUR: 405.99},
+		{abbr: 'PLN', rateToEUR:  65.6},
+	];
 
 	connectedCallback() {
 		this.loadSupportedSymbols();
@@ -63,5 +73,9 @@ export default class CurrencyRates extends LightningElement {
 		//console.log('handleMultiselectChange event', event);
 		this.symbols = event?.detail?.value;
 		console.log('handleMultiselectChange symbols', JSON.stringify(this.symbols));
+	}
+
+	handleBaseChange(event) {
+		this.base = event?.detail?.value;
 	}
 }
