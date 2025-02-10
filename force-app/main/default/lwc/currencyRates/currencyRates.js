@@ -29,9 +29,9 @@ export default class CurrencyRates extends LightningElement {
 				//         "AFN": "Afghan Afghani",
 
 				this.symbolOptions = [];
-				for (const symbolRow in this.supportedSymbols) {
+				for (const symbolRow in this.supportedSymbols?.symbols) {
 					this.symbolOptions.push({
-						label: '' + symbolRow + ' - ' + this.supportedSymbols[symbolRow],
+						label: '' + symbolRow + ' - ' + this.supportedSymbols.symbols[symbolRow],
 						value: symbolRow
 					});
 				}
@@ -60,6 +60,8 @@ export default class CurrencyRates extends LightningElement {
 	}
 
 	handleMultiselectChange(event) {
-
+		//console.log('handleMultiselectChange event', event);
+		this.symbols = event?.detail?.value;
+		console.log('handleMultiselectChange symbols', JSON.stringify(this.symbols));
 	}
 }
