@@ -6,20 +6,19 @@ import {LightningElement} from 'lwc';
 
 export default class CurrencyRates extends LightningElement {
 	apiKey = '5007bbeac86574994088d4021dac9a12';
-	base;
+	base = 'EUR';
 	supportedSymbols;
 	symbolOptions;
 	symbols;
+
+	baseToEUR = 1.0;
 	ratesToEUR;
 
 	columns = [
 		{label: 'Currency Abbreviation', fieldName: 'abbr'},
-		{label: 'Conversion Rate to EUR', fieldName: 'rateToEUR'},
+		{label: 'Conversion Rate', fieldName: 'rate'},
 	];
-	data = [
-		{abbr: 'HUF', rateToEUR: 405.99},
-		{abbr: 'PLN', rateToEUR:  65.6},
-	];
+	data = [];
 
 	connectedCallback() {
 		this.loadSupportedSymbols();
@@ -69,13 +68,31 @@ export default class CurrencyRates extends LightningElement {
 			.finally(()=>{});
 	}
 
+	recalculateTable() {
+		this.data = [];
+		for (const symbol of this.symbols) {
+			for (const rateToEURabbr in this.ratesToEUR?.rates) {
+				if (symbol == rateToEURabbr) {
+					this.data.push({abbr: symbol, rate: +this.ratesToEUR?.rates[rateToEURabbr] / this.baseToEUR });
+				}
+			}
+		}
+	}
+
 	handleMultiselectChange(event) {
 		//console.log('handleMultiselectChange event', event);
 		this.symbols = event?.detail?.value;
 		console.log('handleMultiselectChange symbols', JSON.stringify(this.symbols));
+
+		this.recalculateTable();
 	}
 
 	handleBaseChange(event) {
 		this.base = event?.detail?.value;
+		console.log('handleBaseChange base', this.base);
+		this.baseToEUR = +this.ratesToEUR?.rates[this.base];
+		console.log('handleBaseChange baseToEUR', this.baseToEUR);
+
+		this.recalculateTable();
 	}
 }
