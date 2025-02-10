@@ -6,10 +6,12 @@ import {LightningElement} from 'lwc';
 
 export default class CurrencyRates extends LightningElement {
 	apiKey = '5007bbeac86574994088d4021dac9a12';
-	base;
+	base = 'EUR';
 	supportedSymbols;
 	symbolOptions;
 	symbols;
+
+	baseToEUR = 1.0;
 	ratesToEUR;
 
 	columns = [
@@ -77,5 +79,8 @@ export default class CurrencyRates extends LightningElement {
 
 	handleBaseChange(event) {
 		this.base = event?.detail?.value;
+		console.log('handleBaseChange base', this.base);
+		this.baseToEUR = +this.ratesToEUR?.rates[this.base];
+		console.log('handleBaseChange baseToEUR', this.baseToEUR);
 	}
 }
