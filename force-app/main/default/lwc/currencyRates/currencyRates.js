@@ -18,10 +18,7 @@ export default class CurrencyRates extends LightningElement {
 		{label: 'Currency Abbreviation', fieldName: 'abbr'},
 		{label: 'Conversion Rate', fieldName: 'rate'},
 	];
-	data = [
-		{abbr: 'HUF', rate: 405.99},
-		{abbr: 'PLN', rate:  65.6},
-	];
+	data = [];
 
 	connectedCallback() {
 		this.loadSupportedSymbols();
@@ -71,10 +68,23 @@ export default class CurrencyRates extends LightningElement {
 			.finally(()=>{});
 	}
 
+	recalculateTable() {
+		this.data = [];
+		for (const symbol of this.symbols) {
+			for (const rateToEURabbr in this.ratesToEUR?.rates) {
+				if (symbol == rateToEURabbr) {
+					this.data.push({abbr: symbol, rate: +this.ratesToEUR?.rates[rateToEURabbr] / this.baseToEUR });
+				}
+			}
+		}
+	}
+
 	handleMultiselectChange(event) {
 		//console.log('handleMultiselectChange event', event);
 		this.symbols = event?.detail?.value;
 		console.log('handleMultiselectChange symbols', JSON.stringify(this.symbols));
+
+		this.recalculateTable();
 	}
 
 	handleBaseChange(event) {
@@ -82,5 +92,7 @@ export default class CurrencyRates extends LightningElement {
 		console.log('handleBaseChange base', this.base);
 		this.baseToEUR = +this.ratesToEUR?.rates[this.base];
 		console.log('handleBaseChange baseToEUR', this.baseToEUR);
+
+		this.recalculateTable();
 	}
 }
