@@ -260,7 +260,7 @@ public with sharing class SchedulableTripPlannerMeasureDistances implements Sche
     }
 
     // Store into Platform Cache
-    Cache.OrgPartition orgPartition = Cache.Org.getPartition(CACHE_PARTITION);
+    //Cache.OrgPartition orgPartition = Cache.Org.getPartition(CACHE_PARTITION);
     try {
       for (String PlatformCacheKey : pushablePlatformCachePairs.keySet()) {
 //        orgPartition.put(

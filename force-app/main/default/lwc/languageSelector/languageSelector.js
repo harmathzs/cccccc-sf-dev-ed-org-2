@@ -18,11 +18,11 @@ export default class LanguageSelector extends LightningElement {
 		{label: 'Magyar', value: 'hu_HU', imgSrc:   `/flags/4x3/hu.svg`},
 		//{label: 'Čeština', value: 'cs', imgSrc:   `/flags/4x3/cz.svg`},
 		//{label: 'Slovensko', value: 'sk', imgSrc:   `/flags/4x3/sk.svg`},
-		{label: 'Polski', value: 'pl', imgSrc:   `/flags/4x3/pl.svg`},
+		//{label: 'Polski', value: 'pl', imgSrc:   `/flags/4x3/pl.svg`},
 		//{label: 'deutsch', value: 'de', imgSrc:   `/flags/4x3/at.svg`},
-		{label: 'Română', value: 'ro', imgSrc:   `/flags/4x3/ro.svg`},
+		//{label: 'Română', value: 'ro', imgSrc:   `/flags/4x3/ro.svg`},
 		//{label: 'Српски', value: 'sr', imgSrc:   `/flags/4x3/rs.svg`},
-		{label: 'Slovene', value: 'sl', imgSrc:   `/flags/4x3/si.svg`},
+		//{label: 'Slovene', value: 'sl', imgSrc:   `/flags/4x3/si.svg`},
 	];
 
 	@wire(getRecord, {recordId: userId, fields: ['User.LocaleSidKey']})
