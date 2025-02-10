@@ -14,11 +14,11 @@ export default class CurrencyRates extends LightningElement {
 
 	columns = [
 		{label: 'Currency Abbreviation', fieldName: 'abbr'},
-		{label: 'Conversion Rate to EUR', fieldName: 'rateToEUR'},
+		{label: 'Conversion Rate', fieldName: 'rate'},
 	];
 	data = [
-		{abbr: 'HUF', rateToEUR: 405.99},
-		{abbr: 'PLN', rateToEUR:  65.6},
+		{abbr: 'HUF', rate: 405.99},
+		{abbr: 'PLN', rate:  65.6},
 	];
 
 	connectedCallback() {
