@@ -7,7 +7,7 @@ import {LightningElement} from 'lwc';
 export default class CurrencyRates extends LightningElement {
 	apiKey = '5007bbeac86574994088d4021dac9a12';
 	supportedSymbols;
-	base = 'EUR';
+	symbolOptions;
 	symbols;
 	ratesToEUR;
 
@@ -27,6 +27,14 @@ export default class CurrencyRates extends LightningElement {
 				//     "symbols": {
 				//         "AED": "United Arab Emirates Dirham",
 				//         "AFN": "Afghan Afghani",
+
+				this.symbolOptions = [];
+				for (const symbolRow in this.supportedSymbols) {
+					this.symbolOptions.push({
+						label: '' + symbolRow + ' - ' + this.supportedSymbols[symbolRow],
+						value: symbolRow
+					});
+				}
 			})
 			.catch(err => console.log(err))
 			.finally(() => {});
@@ -51,8 +59,7 @@ export default class CurrencyRates extends LightningElement {
 			.finally(()=>{});
 	}
 
-	handleEndpointChange(event) {
-		//console.log('handleEndpointChange event', event);
-		this.endpoint = event?.detail?.value;
+	handleMultiselectChange(event) {
+
 	}
 }

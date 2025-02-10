@@ -6,12 +6,13 @@
 <template>
 	<lightning-card>
 		<div class="slds-p-around_medium">
-			<lightning-input
-				label="Endpoint"
-				value={endpoint}
-				onchange={handleEndpointChange}
+			<c-multi-select label="Choose currencies"
+							options={symbolOptions}
+							can-toggle-all="true"
+							value={symbols}
+							onchange={handleMultiselectChange}
 			>
-			</lightning-input>
+			</c-multi-select>
 		</div>
 	</lightning-card>
 </template>
