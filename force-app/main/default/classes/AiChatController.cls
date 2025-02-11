@@ -4,7 +4,7 @@
 
 public with sharing class AiChatController {
 	@AuraEnabled
-	public static HttpCalloutController.OutputParams calloutToGroq(String requestBodyJSON) {
+	public static String calloutToGroq(String requestBodyJSON) {
 		String groqApikey = '';
 
 		AI_Setting__mdt[] aiSettings = [SELECT Id, AI_Provider__c, API_Key__c FROM AI_Setting__mdt];
@@ -23,7 +23,8 @@ public with sharing class AiChatController {
 		inp.headerValue2 = 'Bearer '+groqApikey;
 		inp.inputBody = requestBodyJSON;
 		HttpCalloutController.OutputParams[] results = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('calloutToGroq results: '+results);
 		if (results==null || results.isEmpty()) return null;
-		return results[0];
+		return JSON.serializePretty(results[0]);
 	}
 }
