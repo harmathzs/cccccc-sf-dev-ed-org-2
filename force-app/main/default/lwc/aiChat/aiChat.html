@@ -6,10 +6,14 @@
 <template>
 	<lightning-card icon-name="utility:chat" title="AI Chat LWC">
 		<div class="slds-p-around_small">
-			<div class="upper-content-region">
+			<div class="upper-content-region slds-scrollable">
 				<template for:each={messages} for:item="message">
-					<div key={message.content}><strong>{message.role}</strong></div>
-					<div key={message.content}>{message.content}</div>
+					<div key={message.content}>
+						<lightning-icon icon-name="utility:user"></lightning-icon>&nbsp;<strong>{message.role}</strong>
+					</div>
+					<div key={message.content}>
+						<lightning-icon icon-name="utility:app_web_messaging"></lightning-icon>&nbsp;{message.content}
+					</div>
 				</template>
 			</div>
 			<div id="lower-content-region" onkeypress={handleKeyPress}>
