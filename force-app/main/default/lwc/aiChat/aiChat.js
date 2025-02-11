@@ -71,6 +71,12 @@ export default class AiChat extends LightningElement {
 
 	handleResetClick(event) {
 		console.log('handleResetClick event', event);
+
+		this.conversation = {
+			model: 'deepseek-r1-distill-llama-70b',
+			messages: [],
+		};
+		this.question = null;
 	}
 
 	handleKeyPress(event) {
