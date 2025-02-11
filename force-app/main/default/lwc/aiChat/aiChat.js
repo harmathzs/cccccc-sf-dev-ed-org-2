@@ -12,12 +12,16 @@ export default class AiChat extends LightningElement {
 		messages: [],
 	};
 
+	get messages() {
+		return [...this.conversation?.messages];
+	}
+
 	isLoading = false;
 
 	handleInputChange(event) {
 		//console.log('handleInputChange event', event);
 		this.question = event?.detail?.value;
-		console.log('handleInputChange question', this.question);
+		//console.log('handleInputChange question', this.question);
 	}
 
 	handleSendClick(event) {

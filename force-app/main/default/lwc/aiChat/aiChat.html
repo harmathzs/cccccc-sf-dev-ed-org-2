@@ -4,10 +4,13 @@
 
 <!-- AI Chat -->
 <template>
-	<lightning-card title="AI Chat LWC">
+	<lightning-card icon-name="utility:chat" title="AI Chat LWC">
 		<div class="slds-p-around_small">
 			<div class="upper-content-region">
-				<p>{conversation}</p>
+				<template for:each={messages} for:item="message">
+					<div key={message.content}><strong>{message.role}</strong></div>
+					<div key={message.content}>{message.content}</div>
+				</template>
 			</div>
 			<div id="lower-content-region" onkeypress={handleKeyPress}>
 				<lightning-spinner if:true={isLoading} alternative-text="Loading ... " size="small"></lightning-spinner>
