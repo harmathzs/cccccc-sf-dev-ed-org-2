@@ -12,6 +12,8 @@ export default class AiChat extends LightningElement {
 		messages: [],
 	};
 
+	isLoading = false;
+
 	handleInputChange(event) {
 		//console.log('handleInputChange event', event);
 		this.question = event?.detail?.value;
@@ -20,6 +22,8 @@ export default class AiChat extends LightningElement {
 
 	handleSendClick(event) {
 		console.log('handleSendClick event', event);
+
+		this.isLoading = true;
 
 		this.conversation.messages.push({
 			role: 'user',
@@ -60,7 +64,9 @@ export default class AiChat extends LightningElement {
 
 			})
 			.catch(err => console.log(err))
-			.finally(() => {});
+			.finally(() => {
+				this.isLoading = false;
+			});
 	}
 
 	handleResetClick(event) {
