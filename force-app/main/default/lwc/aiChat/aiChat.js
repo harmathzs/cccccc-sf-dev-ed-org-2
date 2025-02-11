@@ -29,7 +29,7 @@ export default class AiChat extends LightningElement {
 
 		calloutToGroq({requestBodyJSON: conversationJSON})
 			.then(outputParams => {
-				console.log('calloutToGroq outputParams', outputParams);
+				console.log('calloutToGroq outputParams', outputParams); // {"statusText" : "OK","statusCode" : 200,"responseBody" : "{\"id\":
 				const outputParamsObj = JSON.parse(outputParams);
 				//console.log('calloutToGroq outputParamsObj', JSON.stringify(outputParamsObj));
 
@@ -38,14 +38,27 @@ export default class AiChat extends LightningElement {
 				const responseBody = outputParamsObj?.responseBody;
 				const errorMessage = outputParamsObj?.errorMessage;
 
-				console.log('calloutToGroq statusCode', statusCode);
-				console.log('calloutToGroq statusText', statusText);
-				console.log('calloutToGroq responseBody', responseBody);
-				console.log('calloutToGroq errorMessage', errorMessage);
+				console.log('calloutToGroq statusCode', statusCode); // 200
+				console.log('calloutToGroq statusText', statusText); // OK
+				console.log('calloutToGroq responseBody', responseBody); // {"id":"chatcmpl-f16b0693-df32-44e4-a34f-0a029e91368a","object":"chat.completion","created":1739268208,"model":"deepseek-r1-distill-llama-70b","choices":[{"index":0,"message":{"role":"assistant","content":
+				console.log('calloutToGroq errorMessage', errorMessage); // null
 
 				const responseObj = JSON.parse(responseBody);
-				console.log('calloutToGroq responseObj', JSON.stringify(responseObj));
+				console.log('calloutToGroq responseObj', JSON.stringify(responseObj)); // {"id":"chatcmpl-f16b0693-df32-44e4-a34f-0a029e91368a","object":"chat.completion","created":1739268208,"model":"deepseek-r1-distill-llama-70b","choices":[{"index":0,"message":{"role":"assistant","content":
 				// TODO - merge answer into conversation
+				const choices = responseObj?.choices;
+				console.log('calloutToGroq choices', JSON.stringify(choices)); // [{"index":0,"message":{"role":"assistant","content":
+
+				for (let choice of choices) {
+					const message = choice?.message;
+					console.log('calloutToGroq message', message);
+					console.log('calloutToGroq message', JSON.stringify(message));
+
+					this.conversation.messages.push({...message});
+					console.log('calloutToGroq conversation', JSON.stringify(this.conversation));
+				}
+
+
 			})
 			.catch(err => console.log(err))
 			.finally(() => {});
