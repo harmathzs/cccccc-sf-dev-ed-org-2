@@ -51,7 +51,6 @@ export default class AiChat extends LightningElement {
 
 				for (let choice of choices) {
 					const message = choice?.message;
-					console.log('calloutToGroq message', message);
 					console.log('calloutToGroq message', JSON.stringify(message));
 
 					this.conversation.messages.push({...message});
