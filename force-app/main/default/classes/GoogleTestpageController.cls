@@ -186,6 +186,12 @@ public with sharing class GoogleTestpageController {
 
 		//RequestResponsePair requestResponsePair = restCallout(authUrl, method, null, null);
 
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = 'GET';
+		inp.endpoint = authUrl;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+
+
 //		AHttpResponse response = GoogleForceConsentLoginService.forceConsentLogin(this);
 //
 //		Google_Settings__c googleCustomSettings = Google_Settings__c.getValues('Last Consent');
@@ -193,10 +199,10 @@ public with sharing class GoogleTestpageController {
 //		System.enqueueJob(customSettingsUpdater);
 		//customSettingsUpdater.execute(null);
 
-//		getConsentRequestString = method + ' ' + authUrl;
-//		System.debug('getConsentRequestString: '+getConsentRequestString);
-//		getConsentResponseBodyJson = response.getBody();
-//		System.debug('getConsentResponseBodyJson: '+getConsentResponseBodyJson);
+		getConsentRequestString = method + ' ' + authUrl;
+		System.debug('getConsentRequestString: '+getConsentRequestString);
+		getConsentResponseBodyJson = returns[0].responseBody;
+		System.debug('getConsentResponseBodyJson: '+getConsentResponseBodyJson);
 
 		return new PageReference(authUrl);
 	}
