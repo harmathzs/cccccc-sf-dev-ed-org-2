@@ -148,6 +148,7 @@ public with sharing class GoogleTestpageController {
 		return null;
 	}
 
+	/*
 	public PageReference getLocations() {
 		String method = 'GET';
 		String endpoint = 'https://mybusiness.googleapis.com/v4/accounts/'+accountidForGetLocations+'/locations';
@@ -179,6 +180,9 @@ public with sharing class GoogleTestpageController {
 		return null;
 	}
 
+	 */
+
+	/*
 	public PageReference putReply() {
 		// PUT https://mybusiness.googleapis.com/v4/accounts/1234567890/locations/0987654321/reviews/abcdef123456/reply
 
@@ -190,7 +194,7 @@ public with sharing class GoogleTestpageController {
 		};
 		String body = '{\n' +
 			'  "comment" : "'+commentForPutReply+'",\n' +
-			/*'  "updateTime" : "2023-01-20T08:36:14.293776Z"\n' +*/
+
 			'}';
 
 
@@ -200,4 +204,7 @@ public with sharing class GoogleTestpageController {
 //		putReplyResponseBodyJson = response.getBody();
 		return null;
 	}
+
+	 */
+
 }

@@ -9,7 +9,7 @@
 		}
 	</style>
 
-	<apex:sectionHeader title="Google Review Service Test page" />
+	<apex:sectionHeader title="Google Test page" />
 
 	<apex:form>
 		<apex:pageBlock title="Authorization">
@@ -81,6 +81,7 @@
 				<apex:outputText rendered="{!NOT(ISBLANK(getAccountsResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!getAccountsResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
+			<!--
 			<apex:pageBlockSection title="GET locations" collapsible="true" showHeader="true">
 				<apex:inputText label="accountid" title="accountid" value="{!accountidForGetLocations}" styleClass="json-string" maxLength="200" /><br />
 				<apex:commandButton title="GET locations" value="GET locations" action="{!getLocations}" /><br />
@@ -106,6 +107,7 @@
 				<apex:outputText rendered="{!NOT(ISBLANK(putReplyResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!putReplyResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
+			-->
 		</apex:pageBlock>
 	</apex:form>
 </apex:page>
