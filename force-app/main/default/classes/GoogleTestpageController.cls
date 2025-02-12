@@ -184,20 +184,10 @@ public with sharing class GoogleTestpageController {
 			'&prompt=consent' + // Force consent
 			'&state=' + EncodingUtil.urlEncode(SCOPE, 'UTF-8');
 
-		//RequestResponsePair requestResponsePair = restCallout(authUrl, method, null, null);
-
 		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
 		inp.method = 'GET';
 		inp.endpoint = authUrl;
 		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
-
-
-//		AHttpResponse response = GoogleForceConsentLoginService.forceConsentLogin(this);
-//
-//		Google_Settings__c googleCustomSettings = Google_Settings__c.getValues('Last Consent');
-//		GoogleCustomSettingsUpdaterAsync customSettingsUpdater = new GoogleCustomSettingsUpdaterAsync(googleCustomSettings);
-//		System.enqueueJob(customSettingsUpdater);
-		//customSettingsUpdater.execute(null);
 
 		getConsentRequestString = method + ' ' + authUrl;
 		System.debug('getConsentRequestString: '+getConsentRequestString);

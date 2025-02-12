@@ -22,8 +22,10 @@
 				<!--
 				<apex:inputText label="CLIENT_SECRET" title="CLIENT_SECRET" value="{!CLIENT_SECRET}" styleClass="json-string" maxLength="200" /><br />
 				-->
-				<apex:outputText value="Password and Client Secret are stored securely in Custom Metadata and are not shown here." /><br />
 				<apex:inputText label="SCOPE" title="SCOPE" value="{!scope}" styleClass="json-string" maxLength="255" /><br />
+
+				<apex:outputText value="Password and Client Secret are stored securely in Custom Metadata and are not shown here." /><br />
+
 				<!--<apex:commandButton title="Google OAuth2 authenticate" value="Google OAuth2 authenticate" action="{!oauth2Authenticate}" /><br />-->
 				<apex:commandButton image="{!URLFOR('https://login.salesforce.com/icons/google-colored.png')}" title="Google consent OAuth2 authenticate" value="Google consent OAuth2 authenticate" action="{!forceConsent}" /><br />
 				<!--<apex:commandButton title="Offline authenticate - not working!" value="Offline authenticate - not working!" action="{!offlineAuthenticate}" /><br />-->
