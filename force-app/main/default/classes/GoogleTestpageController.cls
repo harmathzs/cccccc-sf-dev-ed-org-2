@@ -20,12 +20,82 @@ public with sharing class GoogleTestpageController {
 		}
 	}
 
+	private String privateGooglePassword;
+	public String googlePassword {
+		get {
+			if (String.isBlank(privateGooglePassword)) {
+				privateGooglePassword = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Password__c;
+				return privateGooglePassword;
+			} else return privateGooglePassword;
+		}
+		set {
+			if (String.isBlank(value)) {
+				privateGooglePassword = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Password__c;
+			} else privateGooglePassword = value;
+		}
+	}
 
-	public String googlePassword {get; set;}
-	public String CLIENT_ID {get; set;}
-	public String CLIENT_SECRET {get; set;}
-	public String scope {get; set;}
-	public String REDIRECT_URI {get; set;}
+	private String privateClientId;
+	public String CLIENT_ID {
+		get {
+			if (String.isBlank(privateClientId)) {
+				privateClientId = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Client_Id__c;
+				return privateClientId;
+			} else return privateClientId;
+		}
+		set {
+			if (String.isBlank(value)) {
+				privateClientId = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Client_Id__c;
+			} else privateClientId = value;
+		}
+	}
+
+	private String privateClientSecret;
+	public String CLIENT_SECRET {
+		get {
+			if (String.isBlank(privateClientSecret)) {
+				privateClientSecret = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Client_Secret__c;
+				return privateClientSecret;
+			} else return privateClientSecret;
+		}
+		set {
+			if (String.isBlank(value)) {
+				privateClientSecret = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Client_Secret__c;
+			} else privateClientSecret = value;
+		}
+	}
+
+	private String privateScope;
+	public String scope {
+		get {
+			if (String.isBlank(privateScope)) {
+				privateScope = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Scope__c;
+				return privateScope;
+			} else return privateScope;
+		}
+		set {
+			if (String.isBlank(value)) {
+				privateScope = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Scope__c;
+			} else privateScope = value;
+		}
+	}
+
+	private String privateRedirectUri;
+	public String REDIRECT_URI {
+		get {
+			if (String.isBlank(privateRedirectUri)) {
+				privateRedirectUri = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Redirect_URI__c;
+				return privateRedirectUri;
+			} else return privateRedirectUri;
+		}
+		set {
+			if (String.isBlank(value)) {
+				privateRedirectUri = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Redirect_URI__c;
+			} else privateRedirectUri = value;
+		}
+	}
+
+
 	public String accessToken {get; set;}
 	public String refreshToken {get; set;}
 

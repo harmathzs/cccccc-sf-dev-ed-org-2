@@ -15,7 +15,9 @@
 		<apex:pageBlock title="Authorization">
 			<apex:pageBlockSection title="OAuth2 authenticate" collapsible="true" showHeader="true">
 				<apex:inputText label="Username" title="Username" value="{!googleUsername}" styleClass="json-string" maxLength="200" /><br />
+				<!--
 				<apex:inputText label="Password" title="Password" value="{!googlePassword}" disabled="true" styleClass="json-string" maxLength="200" /><br />
+				-->
 				<apex:inputText label="CLIENT_ID" title="CLIENT_ID" value="{!CLIENT_ID}" styleClass="json-string" maxLength="200" /><br />
 				<apex:inputText label="CLIENT_SECRET" title="CLIENT_SECRET" value="{!CLIENT_SECRET}" styleClass="json-string" maxLength="200" /><br />
 				<apex:inputText label="SCOPE" title="SCOPE" value="{!scope}" styleClass="json-string" maxLength="255" /><br />
