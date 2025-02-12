@@ -4,7 +4,23 @@
 
 public with sharing class GoogleTestpageController {
 	public String authorizationCode {get; set;}
-	public String googleUsername {get; set;}
+
+	private String privateGoogleUsername;
+	public String googleUsername {
+		get {
+			if (String.isBlank(privateGoogleUsername)) {
+				privateGoogleUsername = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Username__c;
+				return privateGoogleUsername;
+			} else return privateGoogleUsername;
+		}
+		set {
+			if (String.isBlank(value)) {
+				privateGoogleUsername = [SELECT Id, Username__c, Password__c, Client_Id__c, Client_Secret__c, Scope__c, Redirect_URI__c FROM Google_Credential__mdt LIMIT 1].Username__c;
+			} else privateGoogleUsername = value;
+		}
+	}
+
+
 	public String googlePassword {get; set;}
 	public String CLIENT_ID {get; set;}
 	public String CLIENT_SECRET {get; set;}
