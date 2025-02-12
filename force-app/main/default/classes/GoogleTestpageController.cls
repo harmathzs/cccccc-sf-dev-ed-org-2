@@ -1,0 +1,203 @@
+/**
+ * Created by Harmath Zsolt on 2025. 02. 11.
+ */
+
+public with sharing class GoogleTestpageController {
+	public String authorizationCode {get; set;}
+	public String googleUsername {get; set;}
+	public String googlePassword {get; set;}
+	public String CLIENT_ID {get; set;}
+	public String CLIENT_SECRET {get; set;}
+	public String scope {get; set;}
+	public String REDIRECT_URI {get; set;}
+	public String accessToken {get; set;}
+	public String refreshToken {get; set;}
+
+	public String accessTokenRequestString {get; set;}
+	public String accessTokenResponseBodyJson {get; set;}
+
+	public String refreshTokenRequestString {get; set;}
+	public String refreshTokenResponseBodyJson {get; set;}
+
+	public Integer expiresIn {get; set;}
+	public Datetime tokenExpirationTime {get; set;}
+
+	public String getUserinfoRequestString {get; set;}
+	public String getUserinfoResponseBodyJson {get; set;}
+
+	public String getAccountsRequestString {get; set;}
+	public String getAccountsResponseBodyJson {get; set;}
+
+	public String getLocationsRequestString {get; set;}
+	public String getLocationsResponseBodyJson {get; set;}
+
+	public String getReviewsRequestString {get; set;}
+	public String getReviewsResponseBodyJson {get; set;}
+
+	public String putReplyRequestString {get; set;}
+	public String putReplyResponseBodyJson {get; set;}
+
+	public String getOauthRequestString {get; set;}
+	public String getOauthResponseBodyJson {get; set;}
+
+	public String getConsentRequestString {get; set;}
+	public String getConsentResponseBodyJson {get; set;}
+
+	public String accountidForGetLocations {get; set;}
+	public String locationidForGetReviews {get; set;}
+	public String reviewidForPutReply {get; set;}
+	public String commentForPutReply {get; set;}
+
+
+	public PageReference handleCallback() {
+		System.debug('handleCallback start');
+		Map<String, String> params = ApexPages.currentPage().getParameters();
+		for(String key : params.keySet()) {
+			System.debug('Parameter: ' + key + ' = ' + params.get(key));
+		}
+
+		if (params.containsKey('code')) {
+			//GoogleTestpageController.authorizationCodeStatic = params.get('code');
+			authorizationCode = params.get('code');
+			System.debug('authorizationCode: ' + authorizationCode);
+
+			// Callback calls for exchanging auth.code to access token:
+			newAccessTokenNow();
+
+		} else if (params.containsKey('error')) {
+			String errorMessage = 'Error: ' + params.get('error');
+			System.debug('Error: ' + errorMessage);
+		}
+		return null;
+	}
+
+	public PageReference newAccessTokenNow() {
+		//GoogleNewAccessTokenAsync newAccessTokenAsync = new GoogleNewAccessTokenAsync();
+		//newAccessTokenAsync.controller = this;
+
+		//System.enqueueJob(newAccessTokenAsync);
+
+		return null;
+	}
+
+	public PageReference forceConsent() {
+		System.debug('Google Username: '+googleUsername);
+		System.debug('Google Password: '+googlePassword);
+		System.debug('Google CLIENT_ID: '+CLIENT_ID);
+		System.debug('Google CLIENT_SECRET: '+CLIENT_SECRET);
+
+		String baseUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+		String method = 'GET';
+		String authUrl = baseUrl +
+			'?client_id=' + EncodingUtil.urlEncode(CLIENT_ID, 'UTF-8') +
+			'&redirect_uri=' + EncodingUtil.urlEncode(REDIRECT_URI, 'UTF-8') +
+			'&response_type=code' +
+			'&scope=' + EncodingUtil.urlEncode(SCOPE, 'UTF-8') +
+			'&access_type=offline' +
+			'&prompt=consent' + // Force consent
+			'&state=' + EncodingUtil.urlEncode(SCOPE, 'UTF-8');
+
+		//RequestResponsePair requestResponsePair = restCallout(authUrl, method, null, null);
+
+//		AHttpResponse response = GoogleForceConsentLoginService.forceConsentLogin(this);
+//
+//		Google_Settings__c googleCustomSettings = Google_Settings__c.getValues('Last Consent');
+//		GoogleCustomSettingsUpdaterAsync customSettingsUpdater = new GoogleCustomSettingsUpdaterAsync(googleCustomSettings);
+//		System.enqueueJob(customSettingsUpdater);
+		//customSettingsUpdater.execute(null);
+
+//		getConsentRequestString = method + ' ' + authUrl;
+//		System.debug('getConsentRequestString: '+getConsentRequestString);
+//		getConsentResponseBodyJson = response.getBody();
+//		System.debug('getConsentResponseBodyJson: '+getConsentResponseBodyJson);
+
+		return new PageReference(authUrl);
+	}
+
+	public PageReference refreshAccessToken() {
+		//GoogleRefreshTokenAsync refreshTokenQueueable = new GoogleRefreshTokenAsync();
+		//refreshTokenQueueable.controller = this;
+
+		//System.enqueueJob(refreshTokenQueueable);
+
+		return null;
+	}
+
+	public PageReference getUserinfo() {
+		String method = 'GET';
+		String endpoint = 'https://www.googleapis.com/oauth2/v3/userinfo';
+
+//		AHttpResponse response = GoogleGETuserinfoService.getGoogleUserinfo();
+//
+//		getUserinfoRequestString = method + ' ' + endpoint;
+//		getUserinfoResponseBodyJson = response.getBody();
+
+		return null;
+	}
+
+	public PageReference getAccounts() {
+		String method = 'GET';
+//		String endpoint = Constants.GOOGLE_REVIEW.GoogleGETAccountsEndpoint;
+//
+//		AHttpResponse response = GoogleGETaccountsService.getGoogleAccounts();
+//
+//		getAccountsRequestString = method + ' ' + endpoint;
+//		getAccountsResponseBodyJson = response.getBody();
+
+		return null;
+	}
+
+	public PageReference getLocations() {
+		String method = 'GET';
+		String endpoint = 'https://mybusiness.googleapis.com/v4/accounts/'+accountidForGetLocations+'/locations';
+
+//		AHttpResponse response = GoogleGETlocationsService.getGoogleLocations(accountidForGetLocations);
+//
+//		getLocationsRequestString = method + ' ' + endpoint;
+//		getLocationsResponseBodyJson = response.getBody();
+		return null;
+	}
+
+	public PageReference getReviews() {
+		Datetime oneDayAgo = Datetime.now().addDays(-1);
+		String datePart = oneDayAgo.format('yyyy-MM-dd');
+		String timePart = oneDayAgo.format('HH:mm:ss');
+		String oneDayAgoStr = datePart +'T'+ timePart +'Z'+ '';
+
+
+		String method = 'GET';
+		String endpoint = 'https://mybusiness.googleapis.com/v4/accounts/'+accountidForGetLocations+'/locations/'+locationidForGetReviews+'/reviews?filter=createTime>="'+oneDayAgoStr+'"&pageSize=100';
+		Map<String, String> header = new Map<String, String>{
+			'Authorization' => 'Bearer ' + accessToken
+		};
+
+//		AHttpResponse response = GoogleGETreviewsService.getGoogleReviews(accountidForGetLocations, locationidForGetReviews);
+//
+//		getReviewsRequestString = method + ' ' + endpoint;
+//		getReviewsResponseBodyJson = response.getBody();
+		return null;
+	}
+
+	public PageReference putReply() {
+		// PUT https://mybusiness.googleapis.com/v4/accounts/1234567890/locations/0987654321/reviews/abcdef123456/reply
+
+		String method = 'PUT';
+		String endpoint = 'https://mybusiness.googleapis.com/v4/accounts/'+accountidForGetLocations+'/locations/'+locationidForGetReviews+'/reviews/'+reviewidForPutReply+'/reply';
+		Map<String, String> header = new Map<String, String>{
+			'Authorization' => 'Bearer ' + accessToken,
+			'Content-Type' => 'application/json'
+		};
+		String body = '{\n' +
+			'  "comment" : "'+commentForPutReply+'",\n' +
+			/*'  "updateTime" : "2023-01-20T08:36:14.293776Z"\n' +*/
+			'}';
+
+
+//		AHttpResponse response = GooglePUTreplyService.putGoogleReply(accountidForGetLocations, locationidForGetReviews, reviewidForPutReply, commentForPutReply);
+//
+//		putReplyRequestString = method + ' ' + endpoint;
+//		putReplyResponseBodyJson = response.getBody();
+		return null;
+	}
+}
