@@ -281,12 +281,18 @@ public with sharing class GoogleTestpageController {
 
 	public PageReference getAccounts() {
 		String method = 'GET';
-//		String endpoint = Constants.GOOGLE_REVIEW.GoogleGETAccountsEndpoint;
-//
-//		AHttpResponse response = GoogleGETaccountsService.getGoogleAccounts();
-//
-//		getAccountsRequestString = method + ' ' + endpoint;
-//		getAccountsResponseBodyJson = response.getBody();
+		String endpoint = 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts';
+
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = 'GET';
+		inp.endpoint = 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts';
+		inp.headerKey1 = 'Authorization';
+		inp.headerValue1 = 'Bearer '+accessToken;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('refreshAccessToken returns: '+returns);
+
+		getAccountsRequestString = method + ' ' + endpoint;
+		getAccountsResponseBodyJson = returns[0].responseBody;
 
 		return null;
 	}
