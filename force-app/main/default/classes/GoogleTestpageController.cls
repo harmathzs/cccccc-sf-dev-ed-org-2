@@ -265,10 +265,16 @@ public with sharing class GoogleTestpageController {
 		String method = 'GET';
 		String endpoint = 'https://www.googleapis.com/oauth2/v3/userinfo';
 
-//		AHttpResponse response = GoogleGETuserinfoService.getGoogleUserinfo();
-//
-//		getUserinfoRequestString = method + ' ' + endpoint;
-//		getUserinfoResponseBodyJson = response.getBody();
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = 'GET';
+		inp.endpoint = 'https://www.googleapis.com/oauth2/v3/userinfo';
+		inp.headerKey1 = 'Authorization';
+		inp.headerValue1 = 'Bearer '+accessToken;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('refreshAccessToken returns: '+returns);
+
+		getUserinfoRequestString = method + ' ' + endpoint;
+		getUserinfoResponseBodyJson = returns[0].responseBody;
 
 		return null;
 	}
