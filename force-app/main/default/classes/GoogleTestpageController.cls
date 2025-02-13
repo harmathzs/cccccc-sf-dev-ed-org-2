@@ -156,30 +156,6 @@ public with sharing class GoogleTestpageController {
 		return null;
 	}
 
-	public PageReference newAccessTokenNow() {
-		String body = 'code=' + EncodingUtil.urlEncode(authorizationCode, 'UTF-8')
-			+ '&client_id=' + EncodingUtil.urlEncode(CLIENT_ID, 'UTF-8')
-			+ '&client_secret=' + EncodingUtil.urlEncode(CLIENT_SECRET, 'UTF-8')
-			+ '&redirect_uri=' + EncodingUtil.urlEncode(REDIRECT_URI, 'UTF-8')
-			+ '&grant_type=authorization_code';
-
-		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
-		inp.method = 'POST';
-		inp.endpoint = 'https://oauth2.googleapis.com/token';
-		inp.headerKey1 = 'Content-Type';
-		inp.headerValue1 = 'application/x-www-form-urlencoded';
-		inp.inputBody = body;
-		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
-		System.debug('newAccessTokenNow returns: '+returns);
-
-		Map<String, Object> tokenResponse = (Map<String, Object>) JSON.deserializeUntyped(returns[0].responseBody);
-		System.debug('newAccessTokenNow tokenResponse keySet: ' + tokenResponse.keySet());
-		accessToken = (String) tokenResponse.get('access_token');
-		refreshToken = (String) tokenResponse.get('refresh_token');
-
-		return null;
-	}
-
 	public PageReference forceConsent() {
 		System.debug('Google Username: '+googleUsername);
 		System.debug('Google Password: '+googlePassword);
@@ -211,11 +187,76 @@ public with sharing class GoogleTestpageController {
 		return new PageReference(authUrl);
 	}
 
-	public PageReference refreshAccessToken() {
-		//GoogleRefreshTokenAsync refreshTokenQueueable = new GoogleRefreshTokenAsync();
-		//refreshTokenQueueable.controller = this;
+	public PageReference newAccessTokenNow() {
+		String body = 'code=' + EncodingUtil.urlEncode(authorizationCode, 'UTF-8')
+			+ '&client_id=' + EncodingUtil.urlEncode(CLIENT_ID, 'UTF-8')
+			+ '&client_secret=' + EncodingUtil.urlEncode(CLIENT_SECRET, 'UTF-8')
+			+ '&redirect_uri=' + EncodingUtil.urlEncode(REDIRECT_URI, 'UTF-8')
+			+ '&grant_type=authorization_code';
 
-		//System.enqueueJob(refreshTokenQueueable);
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = 'POST';
+		inp.endpoint = 'https://oauth2.googleapis.com/token';
+		inp.headerKey1 = 'Content-Type';
+		inp.headerValue1 = 'application/x-www-form-urlencoded';
+		inp.inputBody = body;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('newAccessTokenNow returns: '+returns);
+
+		Map<String, Object> tokenResponse = (Map<String, Object>) JSON.deserializeUntyped(returns[0].responseBody);
+		System.debug('newAccessTokenNow tokenResponse keySet: ' + tokenResponse.keySet());
+		accessToken = (String) tokenResponse.get('access_token');
+		refreshToken = (String) tokenResponse.get('refresh_token');
+
+		return null;
+	}
+
+	public PageReference refreshAccessToken() {
+		String body;
+		if (String.isBlank(refreshToken)) {
+			body = 'client_id=' + EncodingUtil.urlEncode(CLIENT_ID, 'UTF-8')
+				+ '&client_secret=' + EncodingUtil.urlEncode(CLIENT_SECRET, 'UTF-8')
+
+				+ '&grant_type=refresh_token';
+		} else {
+			body = 'client_id=' + EncodingUtil.urlEncode(CLIENT_ID, 'UTF-8')
+				+ '&client_secret=' + EncodingUtil.urlEncode(CLIENT_SECRET, 'UTF-8')
+				+ '&refresh_token=' + EncodingUtil.urlEncode(refreshToken, 'UTF-8')
+				+ '&grant_type=refresh_token';
+		}
+
+
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = 'POST';
+		inp.endpoint = 'https://oauth2.googleapis.com/token';
+		inp.headerKey1 = 'Content-Type';
+		inp.headerValue1 = 'application/x-www-form-urlencoded';
+		inp.inputBody = body;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('refreshAccessToken returns: '+returns);
+
+		Map<String, Object> tokenResponse = (Map<String, Object>) JSON.deserializeUntyped(returns[0].responseBody);
+		System.debug('refreshAccessToken tokenResponse keySet: ' + tokenResponse.keySet());
+		if (tokenResponse.containsKey('access_token')) {
+			String newAccessToken = (String) tokenResponse.get('access_token');
+			if (String.isNotBlank(newAccessToken)) {
+				accessToken = newAccessToken;
+			}
+		}
+		if (tokenResponse.containsKey('expires_in')) {
+				expiresIn = (Integer) tokenResponse.get('expires_in');
+				tokenExpirationTime = System.now().addSeconds(expiresIn);
+		}
+		// Check if a new refresh token was issued
+		if (tokenResponse.containsKey('refresh_token')) {
+			String newRefreshToken = (String) tokenResponse.get('refresh_token');
+			if (String.isNotBlank(newRefreshToken)) {
+				refreshToken = newRefreshToken;
+			}
+		}
+
+		System.debug('Access Token: ' + accessToken);
+		System.debug('Refresh Token: ' + refreshToken);
 
 		return null;
 	}
