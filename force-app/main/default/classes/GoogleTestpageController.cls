@@ -143,7 +143,6 @@ public with sharing class GoogleTestpageController {
 		}
 
 		if (params.containsKey('code')) {
-			//GoogleTestpageController.authorizationCodeStatic = params.get('code');
 			authorizationCode = params.get('code');
 			System.debug('authorizationCode: ' + authorizationCode);
 
@@ -158,10 +157,25 @@ public with sharing class GoogleTestpageController {
 	}
 
 	public PageReference newAccessTokenNow() {
-		//GoogleNewAccessTokenAsync newAccessTokenAsync = new GoogleNewAccessTokenAsync();
-		//newAccessTokenAsync.controller = this;
+		String body = 'code=' + EncodingUtil.urlEncode(authorizationCode, 'UTF-8')
+			+ '&client_id=' + EncodingUtil.urlEncode(CLIENT_ID, 'UTF-8')
+			+ '&client_secret=' + EncodingUtil.urlEncode(CLIENT_SECRET, 'UTF-8')
+			+ '&redirect_uri=' + EncodingUtil.urlEncode(REDIRECT_URI, 'UTF-8')
+			+ '&grant_type=authorization_code';
 
-		//System.enqueueJob(newAccessTokenAsync);
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = 'POST';
+		inp.endpoint = 'https://oauth2.googleapis.com/token';
+		inp.headerKey1 = 'Content-Type';
+		inp.headerValue1 = 'application/x-www-form-urlencoded';
+		inp.inputBody = body;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('newAccessTokenNow returns: '+returns);
+
+		Map<String, Object> tokenResponse = (Map<String, Object>) JSON.deserializeUntyped(returns[0].responseBody);
+		System.debug('newAccessTokenNow tokenResponse keySet: ' + tokenResponse.keySet());
+		accessToken = (String) tokenResponse.get('access_token');
+		refreshToken = (String) tokenResponse.get('refresh_token');
 
 		return null;
 	}
