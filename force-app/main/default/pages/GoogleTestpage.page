@@ -81,6 +81,7 @@
 				<apex:outputText rendered="{!NOT(ISBLANK(getUserinfoResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!getUserinfoResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
+			<!-- TODO - list properties nicer on UI -->
 			<apex:pageBlockSection title="GET accounts" collapsible="true" showHeader="true">
 				<apex:commandButton title="GET accounts" value="GET accounts" action="{!getAccounts}" /><br />
 				<apex:outputText rendered="{!NOT(ISBLANK(getAccountsRequestString))}" value="Request: " /><br />
@@ -115,6 +116,9 @@
 				<apex:outputText value="{!putReplyResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
 			-->
+
+			<!-- TODO - show datatable on UI instead of JSON -->
+
 			<apex:pageBlockSection title="GET calendars" collapsible="true" showHeader="true">
 				<apex:commandButton title="GET calendars" value="GET calendars" action="{!getCalendars}" /><br />
 				<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsRequestString))}" value="Request: " /><br />
@@ -129,6 +133,14 @@
 				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!getDriveFilesListResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
+			<apex:pageBlockSection title="GET last emails" collapsible="true" showHeader="true">
+				<apex:commandButton title="GET last emails" value="GET last emails" action="{!getLastEmails}" /><br />
+				<apex:outputText rendered="{!NOT(ISBLANK(getLastEmailsRequestString))}" value="Request: " /><br />
+				<apex:outputText value="{!getLastEmailsRequestString}" /><br />
+				<apex:outputText rendered="{!NOT(ISBLANK(getLastEmailsResponseBodyJson))}" value="Response body JSON: " /><br />
+				<apex:outputText value="{!getLastEmailsResponseBodyJson}" styleClass="json-string" /><br />
+			</apex:pageBlockSection>
+			<!-- TODO - get the actual emails based on message id -->
 		</apex:pageBlock>
 	</apex:form>
 </apex:page>

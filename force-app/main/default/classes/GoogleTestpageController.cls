@@ -135,6 +135,9 @@ public with sharing class GoogleTestpageController {
 	public String getDriveFilesListRequestString {get; set;}
 	public String getDriveFilesListResponseBodyJson {get; set;}
 
+	public String getLastEmailsRequestString {get; set;}
+	public String getLastEmailsResponseBodyJson {get; set;}
+
 	public String accountidForGetLocations {get; set;}
 	public String locationidForGetReviews {get; set;}
 	public String reviewidForPutReply {get; set;}
@@ -390,10 +393,29 @@ public with sharing class GoogleTestpageController {
 		inp.headerKey1 = 'Authorization';
 		inp.headerValue1 = 'Bearer '+accessToken;
 		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
-		System.debug('getCalendars returns: '+returns);
+		System.debug('getDriveFilesList returns: '+returns);
 
 		getDriveFilesListRequestString = method + ' ' + endpoint;
 		getDriveFilesListResponseBodyJson = returns[0].responseBody;
+
+		return null;
+	}
+
+	public PageReference getLastEmails() {
+		String method = 'GET';
+		String endpoint = 'https://gmail.googleapis.com/gmail/v1/users/me/messages';
+		String endpointParameters = '?maxResults=5';
+
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = method;
+		inp.endpoint = endpoint + endpointParameters;
+		inp.headerKey1 = 'Authorization';
+		inp.headerValue1 = 'Bearer '+accessToken;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('getLastEmails returns: '+returns);
+
+		getLastEmailsRequestString = method + ' ' + endpoint;
+		getLastEmailsResponseBodyJson = returns[0].responseBody;
 
 		return null;
 	}
