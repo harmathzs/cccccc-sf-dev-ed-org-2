@@ -115,6 +115,13 @@
 				<apex:outputText value="{!putReplyResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
 			-->
+			<apex:pageBlockSection title="GET calendars" collapsible="true" showHeader="true">
+				<apex:commandButton title="GET calendars" value="GET calendars" action="{!getCalendars}" /><br />
+				<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsRequestString))}" value="Request: " /><br />
+				<apex:outputText value="{!getCalendarsRequestString}" /><br />
+				<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsResponseBodyJson))}" value="Response body JSON: " /><br />
+				<apex:outputText value="{!getCalendarsResponseBodyJson}" styleClass="json-string" /><br />
+			</apex:pageBlockSection>
 		</apex:pageBlock>
 	</apex:form>
 </apex:page>

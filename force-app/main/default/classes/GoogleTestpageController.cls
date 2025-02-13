@@ -129,6 +129,9 @@ public with sharing class GoogleTestpageController {
 	public String getConsentRequestString {get; set;}
 	public String getConsentResponseBodyJson {get; set;}
 
+	public String getCalendarsRequestString {get; set;}
+	public String getCalendarsResponseBodyJson {get; set;}
+
 	public String accountidForGetLocations {get; set;}
 	public String locationidForGetReviews {get; set;}
 	public String reviewidForPutReply {get; set;}
@@ -356,4 +359,21 @@ public with sharing class GoogleTestpageController {
 
 	 */
 
+	public PageReference getCalendars() {
+		String method = 'GET';
+		String endpoint = 'https://www.googleapis.com/calendar/v3/users/me/calendarList';
+
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = method;
+		inp.endpoint = endpoint;
+		inp.headerKey1 = 'Authorization';
+		inp.headerValue1 = 'Bearer '+accessToken;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('getCalendars returns: '+returns);
+
+		getCalendarsRequestString = method + ' ' + endpoint;
+		getCalendarsResponseBodyJson = returns[0].responseBody;
+
+		return null;
+	}
 }
