@@ -1,0 +1,28 @@
+<!--
+ - Created by Harmath Zsolt on 2025. 02. 13..
+ -->
+
+
+<aura:component description="PreviewAccentPDF" controller="AccentController">
+	<lightning:button label="Generate PDF" onclick="{!c.generatePDF}" />
+
+	<aura:if isTrue="{!v.showModal}">
+		<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium slds-hyphenate">PDF Preview</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<iframe src="{!v.pdfUrl}" width="100%" height="500px"></iframe>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning:button label="Create File" onclick="{!c.createFile}" />
+					<lightning:button label="Download" onclick="{!c.downloadPDF}" />
+					<lightning:button label="Close" onclick="{!c.closeModal}" />
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</aura:if>
+</aura:component>
+
