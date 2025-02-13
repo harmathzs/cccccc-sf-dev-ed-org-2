@@ -132,6 +132,9 @@ public with sharing class GoogleTestpageController {
 	public String getCalendarsRequestString {get; set;}
 	public String getCalendarsResponseBodyJson {get; set;}
 
+	public String getDriveFilesListRequestString {get; set;}
+	public String getDriveFilesListResponseBodyJson {get; set;}
+
 	public String accountidForGetLocations {get; set;}
 	public String locationidForGetReviews {get; set;}
 	public String reviewidForPutReply {get; set;}
@@ -373,6 +376,24 @@ public with sharing class GoogleTestpageController {
 
 		getCalendarsRequestString = method + ' ' + endpoint;
 		getCalendarsResponseBodyJson = returns[0].responseBody;
+
+		return null;
+	}
+
+	public PageReference getDriveFilesList() {
+		String method = 'GET';
+		String endpoint = 'https://www.googleapis.com/drive/v3/files';
+
+		HttpCalloutController.InputParams inp = new HttpCalloutController.InputParams();
+		inp.method = method;
+		inp.endpoint = endpoint;
+		inp.headerKey1 = 'Authorization';
+		inp.headerValue1 = 'Bearer '+accessToken;
+		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
+		System.debug('getCalendars returns: '+returns);
+
+		getDriveFilesListRequestString = method + ' ' + endpoint;
+		getDriveFilesListResponseBodyJson = returns[0].responseBody;
 
 		return null;
 	}

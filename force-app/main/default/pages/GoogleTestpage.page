@@ -122,6 +122,13 @@
 				<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!getCalendarsResponseBodyJson}" styleClass="json-string" /><br />
 			</apex:pageBlockSection>
+			<apex:pageBlockSection title="GET Drive files list" collapsible="true" showHeader="true">
+				<apex:commandButton title="GET Drive files list" value="GET Drive files list" action="{!getDriveFilesList}" /><br />
+				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListRequestString))}" value="Request: " /><br />
+				<apex:outputText value="{!getDriveFilesListRequestString}" /><br />
+				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListResponseBodyJson))}" value="Response body JSON: " /><br />
+				<apex:outputText value="{!getDriveFilesListResponseBodyJson}" styleClass="json-string" /><br />
+			</apex:pageBlockSection>
 		</apex:pageBlock>
 	</apex:form>
 </apex:page>
