@@ -34,10 +34,14 @@
     </types>
     <types>
         <members>AI_Setting__mdt</members>
+        <members>Google_Credential__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
         <name>CustomField</name>
+    </types>
+    <types>
+        <name>ListView</name>
     </types>
     <version>62.0</version>
 </Package>
