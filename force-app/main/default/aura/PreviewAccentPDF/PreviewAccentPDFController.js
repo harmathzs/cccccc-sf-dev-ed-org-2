@@ -30,9 +30,14 @@
 		action.setCallback(this, function(response) {
 			var state = response.getState();
 			if (state === "SUCCESS") {
-				console.log("File created with ID: " + response.getReturnValue());
+				var fileId = response.getReturnValue();
+				if (fileId) {
+					component.set("v.resultText", "Success: File created successfully. Id: "+fileId);
+				} else {
+					component.set("v.resultText", "Error: File creation failed.");
+				}
 			} else {
-				console.error("Error creating file: " + response.getError()[0].message);
+				component.set("v.resultText", "Error: An error occurred while creating the file.");
 			}
 		});
 		$A.enqueueAction(action);
