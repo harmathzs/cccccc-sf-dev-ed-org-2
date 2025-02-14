@@ -27,7 +27,7 @@ public with sharing class AccentController {
 	}
 
 	@AuraEnabled
-	public static String downloadPDF() {
+	public static String downloadPDFapex() {
 		System.debug('downloadPDF');
 		return null;
 	}

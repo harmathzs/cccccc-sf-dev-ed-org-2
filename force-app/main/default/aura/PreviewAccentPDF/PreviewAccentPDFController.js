@@ -40,8 +40,12 @@
 
 	downloadPDF : function(component, event, helper) {
 		var pdfUrl = component.get("v.pdfUrl");
-		console.log('downloadPDF pdfUrl', pdfUrl);
-		window.open(pdfUrl, '_blank');
+		var link = document.createElement("a");
+		link.href = pdfUrl;
+		//link.target = "_blank";
+		var now = new Date().getDate();
+		link.download = "Generated Accent PDF - "+ now.toString() +".pdf";
+		link.click();
 	},
 
 	closeModal : function(component, event, helper) {
