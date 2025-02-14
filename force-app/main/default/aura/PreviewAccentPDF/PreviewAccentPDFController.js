@@ -20,9 +20,22 @@
 		component.set("v.showModal", true);
 	},
 
-	createFile : function(component, event, helper) {
+	handleCreateFile  : function(component, event, helper) {
 		console.log('createFile');
 		// Implement file creation logic
+		var action = component.get("c.createFile");
+		action.setParams({
+			"base64PDF": component.get("v.pdfUrl").split(',')[1]
+		});
+		action.setCallback(this, function(response) {
+			var state = response.getState();
+			if (state === "SUCCESS") {
+				console.log("File created with ID: " + response.getReturnValue());
+			} else {
+				console.error("Error creating file: " + response.getError()[0].message);
+			}
+		});
+		$A.enqueueAction(action);
 	},
 
 	downloadPDF : function(component, event, helper) {

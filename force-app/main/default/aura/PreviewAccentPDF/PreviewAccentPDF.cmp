@@ -20,7 +20,7 @@
 					<iframe src="{!v.pdfUrl}" width="100%" height="500px" class="slds-wcag"></iframe>
 				</div>
 				<footer class="slds-modal__footer">
-					<lightning:button label="Create File" onclick="{!c.createFile}" />
+					<lightning:button label="Create File" onclick="{!c.handleCreateFile}" />
 					<lightning:button label="Download" onclick="{!c.downloadPDF}" />
 					<lightning:button label="Close" onclick="{!c.closeModal}" />
 				</footer>
