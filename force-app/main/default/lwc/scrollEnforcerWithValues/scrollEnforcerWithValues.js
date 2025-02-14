@@ -2,10 +2,17 @@
  * Created by Harmath Zsolt on 2025. 02. 07..
  */
 
-import {LightningElement} from 'lwc';
+import {LightningElement, api} from 'lwc';
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
 
 export default class ScrollEnforcerWithValues extends LightningElement {
+	@api showScrollEnforcer = false;
+	handleLaunch(event) {
+		this.showScrollEnforcer = true;
+	}
+
+
+
 	handleAccept(event) {
 		console.log('handleAccept event', event);
 
@@ -16,6 +23,8 @@ export default class ScrollEnforcerWithValues extends LightningElement {
 			message: 'Accepted'
 		});
 		this.dispatchEvent(toast);
+
+		this.showScrollEnforcer = false;
 	}
 
 	handleReject(event) {
@@ -28,5 +37,7 @@ export default class ScrollEnforcerWithValues extends LightningElement {
 			message: 'Rejected'
 		});
 		this.dispatchEvent(toast);
+
+		this.showScrollEnforcer = false;
 	}
 }
