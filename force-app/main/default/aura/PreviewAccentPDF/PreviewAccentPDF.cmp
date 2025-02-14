@@ -6,7 +6,7 @@
 <aura:component description="PreviewAccentPDF" controller="AccentController" implements="flexipage:availableForAllPageTypes,lightning:availableForFlowScreens,lightning:availableForFlowActions">
 	<lightning:button label="Generate PDF" onclick="{!c.generatePDF}" />
 
-	<aura:attribute name="showModal" type="Boolean" default="true" />
+	<aura:attribute name="showModal" type="Boolean" default="false" />
 	<aura:attribute name="pdfUrl" type="String" default="/apex/AccentPDF" />
 
 

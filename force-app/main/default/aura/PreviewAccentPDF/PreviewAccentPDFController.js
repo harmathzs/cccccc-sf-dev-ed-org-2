@@ -5,16 +5,19 @@
 
 ({
 	generatePDF : function(component, event, helper) {
-		var action = component.get("c.generatePDF");
-		console.log('generatePDF action', action);
-		action.setCallback(this, function(response) {
-			var state = response.getState();
-			if (state === "SUCCESS") {
-				component.set("v.pdfUrl", response.getReturnValue());
-				component.set("v.showModal", true);
-			}
-		});
-		$A.enqueueAction(action);
+		// If you need to generate the PDF dynamically, keep the Apex call
+		// var action = component.get("c.generatePDF");
+		// action.setCallback(this, function(response) {
+		//     var state = response.getState();
+		//     if (state === "SUCCESS") {
+		//         component.set("v.pdfUrl", response.getReturnValue());
+		//         component.set("v.showModal", true);
+		//     }
+		// });
+		// $A.enqueueAction(action);
+
+		// If you're using a static Visualforce page, you can simply do:
+		component.set("v.showModal", true);
 	},
 
 	createFile : function(component, event, helper) {
