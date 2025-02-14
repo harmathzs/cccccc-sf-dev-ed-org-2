@@ -7,6 +7,24 @@
 			}
 		</style>
 	</head>
-	<h1>Teniszütő megőrült hűtőnél</h1>
+	<h1>This is a document with many accented letters.</h1>
+	<p>I had to set these to show the accented content like Hungarian text: </p>
+	<p>meta http-equiv = Content-Type content = text/html;charset=UTF-8</p>
+	<p>body style: font-family: Arial Unicode MS;</p>
+	<h2>Teniszütő megőrült hűtőnél</h2>
 	<p>Árvíztűrő tükörfúrógép</p>
+	<table width="100%" border="1" style="border-collapse: collapse;">
+		<tr>
+			<td>ékezetes</td>
+			<td>őrület</td>
+			<td>aáeéiíoóöőuúüű</td>
+			<td>AÁEÉIÍOÓÖŐUÚÜŰ</td>
+		</tr>
+		<tr>
+			<td>őőőő</td>
+			<td>üüüü</td>
+			<td>'"+!%/=()~ˇ^˘°˛`˙´</td>
+			<td>\|€÷×đĐł$ß¤</td>
+		</tr>
+	</table>
 </apex:page>
