@@ -8,6 +8,7 @@
 
 	<aura:attribute name="showModal" type="Boolean" default="false" />
 	<aura:attribute name="pdfUrl" type="String" default="/apex/AccentPDF" />
+	<aura:attribute name="resultText" type="String" default="Press a button to proceed!" />
 
 
 	<aura:if isTrue="{!v.showModal}">
@@ -23,6 +24,7 @@
 					<lightning:button label="Create File" onclick="{!c.handleCreateFile}" />
 					<lightning:button label="Download" onclick="{!c.downloadPDF}" />
 					<lightning:button label="Close" onclick="{!c.closeModal}" />
+					<div class="slds-p-around_small">{!v.resultText}</div>
 				</footer>
 			</div>
 		</section>
