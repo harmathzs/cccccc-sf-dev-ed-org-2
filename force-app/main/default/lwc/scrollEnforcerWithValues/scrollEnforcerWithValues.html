@@ -4,7 +4,13 @@
 
 <!-- Scroll Enforcer with values -->
 <template>
-	<c-scroll-enforcer label="Scroll Enforcer"
+	<lightning-card title="Scroll Enforcer with Values Launcher Card">
+		<div class="slds-p-around_medium">
+			<lightning-button label="Launch Now" onclick={handleLaunch}></lightning-button>
+		</div>
+	</lightning-card>
+
+	<c-scroll-enforcer label="Scroll Enforcer" if:true={showScrollEnforcer}
 					   onreject={handleReject}
 					   onaccept={handleAccept}
 					   content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a condimentum. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum. Tristique senectus et netus et malesuada fames. Ultrices in iaculis nunc sed augue lacus viverra vitae. Pretium viverra suspendisse potenti nullam ac. Erat nam at lectus urna duis convallis. Semper auctor neque vitae tempus quam pellentesque nec nam. Leo vel fringilla est ullamcorper. Purus sit amet volutpat consequat mauris nunc congue. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt.
