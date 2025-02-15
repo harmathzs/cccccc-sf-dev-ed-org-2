@@ -143,6 +143,13 @@ public with sharing class GoogleTestpageController {
 	public String reviewidForPutReply {get; set;}
 	public String commentForPutReply {get; set;}
 
+	public class CalendarItem {
+		public String id {get; set;}
+		public String summary {get; set;}
+		public String description {get; set;}
+		public String timeZone {get; set;}
+	}
+	public CalendarItem[] calendarItems {get; set;}
 
 	public PageReference handleCallback() {
 		System.debug('handleCallback start');
@@ -379,6 +386,24 @@ public with sharing class GoogleTestpageController {
 
 		getCalendarsRequestString = method + ' ' + endpoint;
 		getCalendarsResponseBodyJson = returns[0].responseBody;
+
+		Map<String, Object> calendarsMap = (Map<String, Object>) JSON.deserializeUntyped(getCalendarsResponseBodyJson);
+		System.debug('calendarsMap: '+calendarsMap);
+		Object[] items = (List<Object>) calendarsMap.get('items');
+		System.debug('items: '+items);
+		calendarItems = new List<CalendarItem>();
+		for (Object item: items) {
+			Map<String, Object> itemMap = (Map<String, Object>) item;
+			System.debug('itemMap: '+itemMap);
+			CalendarItem calItem = new CalendarItem();
+			if (itemMap.containsKey('id')) calItem.id = itemMap.get('id').toString();
+			if (itemMap.containsKey('summary')) calItem.summary = itemMap.get('summary').toString();
+			if (itemMap.containsKey('description')) calItem.description = itemMap.get('description').toString();
+			if (itemMap.containsKey('timeZone')) calItem.timeZone = itemMap.get('timeZone').toString();
+			System.debug('calItem: '+calItem);
+			calendarItems.add(calItem);
+		}
+		System.debug('calendarItems: '+calendarItems);
 
 		return null;
 	}
