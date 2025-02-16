@@ -449,10 +449,11 @@ public with sharing class GoogleTestpageController {
 		inp.headerKey1 = 'Authorization';
 		inp.headerValue1 = 'Bearer '+accessToken;
 		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
-		System.debug('getLastEmails returns: '+returns);
+		//System.debug('getLastEmails returns: '+returns);
 
 		getLastEmailsRequestString = method + ' ' + endpoint;
 		getLastEmailsResponseBodyJson = returns[0].responseBody;
+		System.debug('getLastEmails getLastEmailsResponseBodyJson: '+getLastEmailsResponseBodyJson); // {"messages": [{"id": "1950e5bf4741a740","threadId": "1950e5bf4741a740"},{"id": "1950e4a81bef84a4","threadId": "1950e4a81bef84a4"},
 
 		return null;
 	}
