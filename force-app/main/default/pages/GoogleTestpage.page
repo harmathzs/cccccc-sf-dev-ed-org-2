@@ -120,18 +120,61 @@
 			<!-- TODO - show datatable on UI instead of JSON -->
 
 			<apex:pageBlockSection title="GET calendars" collapsible="true" showHeader="true">
-				<apex:commandButton title="GET calendars" value="GET calendars" action="{!getCalendars}" /><br />
-				<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsRequestString))}" value="Request: " /><br />
-				<apex:outputText value="{!getCalendarsRequestString}" /><br />
-				<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsResponseBodyJson))}" value="Response body JSON: " /><br />
-				<apex:outputText value="{!getCalendarsResponseBodyJson}" styleClass="json-string" /><br />
+
+					<apex:commandButton title="GET calendars" value="GET calendars" action="{!getCalendars}" /><br />
+					<!--
+					<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsRequestString))}" value="Request: " /><br />
+					<apex:outputText value="{!getCalendarsRequestString}" /><br />
+					<apex:outputText rendered="{!NOT(ISBLANK(getCalendarsResponseBodyJson))}" value="Response body JSON: " /><br />
+					<apex:outputText value="{!getCalendarsResponseBodyJson}" styleClass="json-string" /><br />
+					-->
+
+
+
+					<apex:pageBlockTable value="{!calendarItems}" var="calItem" border="1">
+						<apex:column headerValue="id" value="{!calItem.id}"/>
+						<apex:column headerValue="summary" value="{!calItem.summary}"/>
+						<apex:column headerValue="description" value="{!calItem.description}"/>
+						<apex:column headerValue="timeZone" value="{!calItem.timezone}"/>
+					</apex:pageBlockTable>
+
+
+
+				<!--
+				<div>
+					<table width="100%" border="1" style="border-collapse: collapse;">
+						<tr>
+							<th>id</th>
+							<th>summary</th>
+							<th>description</th>
+							<th>timeZone</th>
+						</tr>
+						<apex:repeat value="{!calendarItems}" var="calItem">
+							<tr>
+								<td><apex:outputText value="{!calItem.id}" /></td>
+								<td><apex:outputText value="{!calItem.summary}" /></td>
+								<td><apex:outputText value="{!calItem.description}" /></td>
+								<td><apex:outputText value="{!calItem.timezone}" /></td>
+							</tr>
+						</apex:repeat>
+					</table>
+				</div>
+				-->
 			</apex:pageBlockSection>
 			<apex:pageBlockSection title="GET Drive files list" collapsible="true" showHeader="true">
 				<apex:commandButton title="GET Drive files list" value="GET Drive files list" action="{!getDriveFilesList}" /><br />
+				<!--
 				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListRequestString))}" value="Request: " /><br />
 				<apex:outputText value="{!getDriveFilesListRequestString}" /><br />
 				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!getDriveFilesListResponseBodyJson}" styleClass="json-string" /><br />
+				-->
+
+				<apex:pageBlockTable value="{!filesMapsList}" var="fileMap" border="1">
+					<apex:column headerValue="id" value="{!fileMap['id']}"/>
+					<apex:column headerValue="name" value="{!fileMap['name']}"/>
+					<apex:column headerValue="mimeType" value="{!fileMap['mimeType']}"/>
+				</apex:pageBlockTable>
 			</apex:pageBlockSection>
 			<apex:pageBlockSection title="GET last emails" collapsible="true" showHeader="true">
 				<apex:commandButton title="GET last emails" value="GET last emails" action="{!getLastEmails}" /><br />
