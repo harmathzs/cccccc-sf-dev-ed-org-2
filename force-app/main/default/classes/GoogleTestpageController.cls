@@ -408,6 +408,8 @@ public with sharing class GoogleTestpageController {
 		return null;
 	}
 
+	public List<Map<String, Object>> filesMapsList {get; set;}
+
 	public PageReference getDriveFilesList() {
 		String method = 'GET';
 		String endpoint = 'https://www.googleapis.com/drive/v3/files';
@@ -418,10 +420,20 @@ public with sharing class GoogleTestpageController {
 		inp.headerKey1 = 'Authorization';
 		inp.headerValue1 = 'Bearer '+accessToken;
 		HttpCalloutController.OutputParams[] returns = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
-		System.debug('getDriveFilesList returns: '+returns);
+		//System.debug('getDriveFilesList returns: '+returns);
 
 		getDriveFilesListRequestString = method + ' ' + endpoint;
 		getDriveFilesListResponseBodyJson = returns[0].responseBody;
+		//System.debug('getDriveFilesList getDriveFilesListResponseBodyJson: '+getDriveFilesListResponseBodyJson);
+
+		Map<String, Object> driveFilesListMap = (Map<String, Object>) JSON.deserializeUntyped(getDriveFilesListResponseBodyJson);
+		Object[] filesList = (List<Object>) driveFilesListMap.get('files');
+		filesMapsList = new List<Map<String, Object>>();
+		for (Object fileObj: filesList) {
+			Map<String, Object> fileMap = (Map<String, Object>) fileObj;
+			filesMapsList.add(fileMap);
+		}
+		System.debug('filesMapsList: '+filesMapsList); // filesMapsList: ({id=1YE...tt8, kind=drive#file, mimeType=application/vnd.google-apps.spreadsheet, name=Waldorf Bál 2025},
 
 		return null;
 	}

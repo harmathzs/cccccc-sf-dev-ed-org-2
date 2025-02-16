@@ -163,10 +163,18 @@
 			</apex:pageBlockSection>
 			<apex:pageBlockSection title="GET Drive files list" collapsible="true" showHeader="true">
 				<apex:commandButton title="GET Drive files list" value="GET Drive files list" action="{!getDriveFilesList}" /><br />
+				<!--
 				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListRequestString))}" value="Request: " /><br />
 				<apex:outputText value="{!getDriveFilesListRequestString}" /><br />
 				<apex:outputText rendered="{!NOT(ISBLANK(getDriveFilesListResponseBodyJson))}" value="Response body JSON: " /><br />
 				<apex:outputText value="{!getDriveFilesListResponseBodyJson}" styleClass="json-string" /><br />
+				-->
+
+				<apex:pageBlockTable value="{!filesMapsList}" var="fileMap" border="1">
+					<apex:column headerValue="id" value="{!fileMap['id']}"/>
+					<apex:column headerValue="name" value="{!fileMap['name']}"/>
+					<apex:column headerValue="mimeType" value="{!fileMap['mimeType']}"/>
+				</apex:pageBlockTable>
 			</apex:pageBlockSection>
 			<apex:pageBlockSection title="GET last emails" collapsible="true" showHeader="true">
 				<apex:commandButton title="GET last emails" value="GET last emails" action="{!getLastEmails}" /><br />
