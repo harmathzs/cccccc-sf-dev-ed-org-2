@@ -26,6 +26,8 @@ private class HttpCalloutTest {
 		inp.headerValue1 = 'test';
 		inp.headerKey2 = 'test';
 		inp.headerValue2 = 'test';
+		inp.headerKey3 = 'test';
+		inp.headerValue3 = 'test';
 		inp.inputBody = '{}';
 		HttpCalloutController.OutputParams[] outputs = HttpCalloutController.httpCallout(new List<HttpCalloutController.InputParams>{inp});
 	}
