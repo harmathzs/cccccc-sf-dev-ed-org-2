@@ -28,6 +28,9 @@ public with sharing class MnbSoapSchedulable implements Schedulable, Database.Al
 			rate.Base_Currency_Name__c = rateNode.getAttribute('curr', rateNode.getNamespace());
 			rate.Counter_Currency_Name__c = 'HUF';
 			rate.Unit__c = Integer.valueOf(rateNode.getAttribute('unit', rateNode.getNamespace()));
+			rate.Unique_Key__c = rate.Base_Currency_Name__c + '_' +
+				rate.Counter_Currency_Name__c + '_' +
+				rate.Unit__c;
 			// Replace comma with dot for decimal parsing
 			String rateValue = rateNode.getText().replace(',', '.');
 			rate.Rate__c = Decimal.valueOf(rateValue);
@@ -35,6 +38,8 @@ public with sharing class MnbSoapSchedulable implements Schedulable, Database.Al
 			ratesToHufMap.put(rate.Base_Currency_Name__c, rate);
 		}
 
-		System.debug('ratesToHufMap: '+ratesToHufMap);
+		System.debug('ratesToHufMap before upsert: '+ratesToHufMap);
+		upsert ratesToHufMap.values() Unique_Key__c;
+		System.debug('ratesToHufMap after upsert: '+ratesToHufMap);
 	}
 }
