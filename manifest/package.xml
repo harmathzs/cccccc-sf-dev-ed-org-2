@@ -35,6 +35,7 @@
     <types>
         <members>AI_Setting__mdt</members>
         <members>Google_Credential__mdt</members>
+        <members>MNB_Currency_Rate__c</members>
         <name>CustomObject</name>
     </types>
     <types>
