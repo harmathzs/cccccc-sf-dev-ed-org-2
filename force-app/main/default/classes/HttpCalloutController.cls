@@ -17,6 +17,10 @@ global with sharing class HttpCalloutController {
 		@InvocableVariable
 		public String headerValue2;
 		@InvocableVariable
+		public String headerKey3;
+		@InvocableVariable
+		public String headerValue3;
+		@InvocableVariable
 		public String inputBody;
 	}
 	global class OutputParams {
@@ -43,6 +47,9 @@ global with sharing class HttpCalloutController {
 		}
 		if (String.isNotBlank(inputs[0].headerKey2)) {
 			req.setHeader(inputs[0].headerKey2, inputs[0].headerValue2);
+		}
+		if (String.isNotBlank(inputs[0].headerKey3)) {
+			req.setHeader(inputs[0].headerKey3, inputs[0].headerValue3);
 		}
 
 		if (String.isNotBlank(inputs[0].inputBody)) {
