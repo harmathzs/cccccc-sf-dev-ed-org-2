@@ -31,4 +31,22 @@ private class GoogleTestpageTest {
 		controller.getDriveFilesList();
 		controller.getLastEmails();
 	}
+
+	@IsTest static void testProperties() {
+		GoogleTestpageController controller = new GoogleTestpageController();
+		String accessTokenRequestString = controller.accessTokenRequestString;
+		String accessTokenResponseBodyJson = controller.accessTokenResponseBodyJson;
+		String refreshTokenRequestString = controller.refreshTokenRequestString;
+		String refreshTokenResponseBodyJson = controller.refreshTokenResponseBodyJson;
+		Integer expiresIn = controller.expiresIn;
+		Datetime tokenExpirationTime = controller.tokenExpirationTime;
+		String getLocationsRequestString = controller.getLocationsRequestString;
+		String getLocationsResponseBodyJson = controller.getLocationsResponseBodyJson;
+		String getReviewsRequestString = controller.getReviewsRequestString;
+		String getReviewsResponseBodyJson = controller.getReviewsResponseBodyJson;
+		String putReplyRequestString = controller.putReplyRequestString;
+		String putReplyResponseBodyJson = controller.putReplyResponseBodyJson;
+		String getOauthRequestString = controller.getOauthRequestString;
+		String getOauthResponseBodyJson = controller.getOauthResponseBodyJson;
+	}
 }
