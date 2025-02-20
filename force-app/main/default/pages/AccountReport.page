@@ -1,0 +1,14 @@
+<!--
+ - Created by Harmath Zsolt on 2025. 02. 20.
+ -->
+
+<apex:page id="AccountReport" renderAs="pdf" applyHtmlTag="true" applyBodyTag="false">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+		<style>
+			body {
+				font-family: Arial Unicode MS;
+			}
+		</style>
+	</head>
+</apex:page>
