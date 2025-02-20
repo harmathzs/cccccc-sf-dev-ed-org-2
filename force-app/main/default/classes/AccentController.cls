@@ -23,7 +23,7 @@ public with sharing class AccentController {
 
 		ContentVersion cv = new ContentVersion();
 		cv.VersionData = base64PDF!=null ? EncodingUtil.base64Decode(base64PDF) : Blob.valueOf('test');
-		cv.Title = 'Generated Accent PDF - ' + Datetime.now().format();
+		cv.Title = 'Generated Account Report PDF - ' + Datetime.now().format();
 		cv.PathOnClient = cv.Title + '.pdf';
 		insert cv;
 		return cv.Id;

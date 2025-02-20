@@ -49,7 +49,7 @@
 		link.href = pdfUrl;
 		//link.target = "_blank";
 		var now = new Date().getDate();
-		link.download = "Generated Accent PDF - "+ now.toString() +".pdf";
+		link.download = "Generated Account Report PDF - "+ now.toString() +".pdf";
 		link.click();
 	},
 
