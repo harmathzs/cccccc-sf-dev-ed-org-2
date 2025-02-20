@@ -392,6 +392,7 @@ public with sharing class GoogleTestpageController {
 		Object[] items = (List<Object>) calendarsMap.get('items');
 		System.debug('items: '+items);
 		calendarItems = new List<CalendarItem>();
+		if (items!=null && !items.isEmpty())
 		for (Object item: items) {
 			Map<String, Object> itemMap = (Map<String, Object>) item;
 			System.debug('itemMap: '+itemMap);
@@ -429,6 +430,7 @@ public with sharing class GoogleTestpageController {
 		Map<String, Object> driveFilesListMap = (Map<String, Object>) JSON.deserializeUntyped(getDriveFilesListResponseBodyJson);
 		Object[] filesList = (List<Object>) driveFilesListMap.get('files');
 		filesMapsList = new List<Map<String, Object>>();
+		if (filesList!=null && !filesList.isEmpty())
 		for (Object fileObj: filesList) {
 			Map<String, Object> fileMap = (Map<String, Object>) fileObj;
 			filesMapsList.add(fileMap);
