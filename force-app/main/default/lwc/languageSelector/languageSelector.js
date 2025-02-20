@@ -59,7 +59,7 @@ export default class LanguageSelector extends LightningElement {
 				}
 			});
 			let href = new URL(location.href);
-			href.searchParams.set('language', this.selectedLanguage);
+			href.searchParams.set('language', this.locale);
 			location.href = href.toString();
 		} catch (error) {
 			console.error(error);
