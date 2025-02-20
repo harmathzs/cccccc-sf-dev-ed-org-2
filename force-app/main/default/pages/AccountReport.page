@@ -2,7 +2,7 @@
  - Created by Harmath Zsolt on 2025. 02. 20.
  -->
 
-<apex:page id="AccountReport" renderAs="pdf" applyHtmlTag="true" applyBodyTag="false">
+<apex:page id="AccountReport" renderAs="pdf" controller="AccentController" applyHtmlTag="true" applyBodyTag="false">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 		<style>
@@ -11,4 +11,18 @@
 			}
 		</style>
 	</head>
+
+	<h1>Account Report</h1>
+
+	<apex:pageBlock>
+		<apex:pageBlockTable value="{!accounts}" var="account" style="border-collapse: collapse;">
+			<!--
+			<apex:column value="{!account.Id}" style="border: 1px solid black; padding: 5px;" />
+			-->
+			<apex:column value="{!account.Name}" style="border: 1px solid black; padding: 5px;" />
+			<apex:column value="{!account.Industry}" style="border: 1px solid black; padding: 5px;" />
+			<apex:column value="{!account.AnnualRevenue}" style="border: 1px solid black; padding: 5px;" />
+			<apex:column value="{!account.Phone}" style="border: 1px solid black; padding: 5px;" />
+		</apex:pageBlockTable>
+	</apex:pageBlock>
 </apex:page>

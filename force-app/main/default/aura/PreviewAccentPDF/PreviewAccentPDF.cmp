@@ -7,7 +7,7 @@
 	<lightning:button label="Generate PDF" onclick="{!c.generatePDF}" />
 
 	<aura:attribute name="showModal" type="Boolean" default="false" />
-	<aura:attribute name="pdfUrl" type="String" default="/apex/AccentPDF" />
+	<aura:attribute name="pdfUrl" type="String" default="/apex/AccountReport" />
 	<aura:attribute name="resultText" type="String" default="Press a button to proceed!" />
 
 
