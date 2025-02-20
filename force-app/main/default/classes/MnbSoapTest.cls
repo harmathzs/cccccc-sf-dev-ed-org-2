@@ -33,4 +33,12 @@ private class MnbSoapTest {
 		instance.GetCurrencies();
 		instance.GetCurrentExchangeRates();
 	}
+
+	@IsTest static void testGetCurrenciesResponseBody() {
+		MnbSoapService.GetCurrenciesResponseBody currenciesResponseBody = new MnbSoapService.GetCurrenciesResponseBody();
+		String GetCurrenciesResult = currenciesResponseBody.GetCurrenciesResult;
+		String[] GetCurrenciesResult_type_info = currenciesResponseBody.GetCurrenciesResult_type_info;
+		String[] apex_schema_type_info = currenciesResponseBody.apex_schema_type_info;
+		String[] field_order_type_info = currenciesResponseBody.field_order_type_info;
+	}
 }

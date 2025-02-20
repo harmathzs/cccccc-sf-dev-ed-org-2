@@ -31,15 +31,15 @@ public class MnbSoapService {
 //    }
     public class GetCurrenciesResponseBody {
         public String GetCurrenciesResult;
-        private String[] GetCurrenciesResult_type_info = new String[]{'GetCurrenciesResult','http://www.mnb.hu/webservices/',null,'0','1','true'};
-        private String[] apex_schema_type_info = new String[]{'http://www.mnb.hu/webservices/','true','false'};
-        private String[] field_order_type_info = new String[]{'GetCurrenciesResult'};
+		public String[] GetCurrenciesResult_type_info = new String[]{'GetCurrenciesResult','http://www.mnb.hu/webservices/',null,'0','1','true'};
+		public String[] apex_schema_type_info = new String[]{'http://www.mnb.hu/webservices/','true','false'};
+		public String[] field_order_type_info = new String[]{'GetCurrenciesResult'};
     }
     public class GetCurrentExchangeRatesResponseBody {
         public String GetCurrentExchangeRatesResult;
-        private String[] GetCurrentExchangeRatesResult_type_info = new String[]{'GetCurrentExchangeRatesResult','http://www.mnb.hu/webservices/',null,'0','1','true'};
-        private String[] apex_schema_type_info = new String[]{'http://www.mnb.hu/webservices/','true','false'};
-        private String[] field_order_type_info = new String[]{'GetCurrentExchangeRatesResult'};
+		public String[] GetCurrentExchangeRatesResult_type_info = new String[]{'GetCurrentExchangeRatesResult','http://www.mnb.hu/webservices/',null,'0','1','true'};
+		public String[] apex_schema_type_info = new String[]{'http://www.mnb.hu/webservices/','true','false'};
+		public String[] field_order_type_info = new String[]{'GetCurrentExchangeRatesResult'};
     }
 //    public class GetCurrencyUnitsResponseBody {
 //        public String GetCurrencyUnitsResult;
