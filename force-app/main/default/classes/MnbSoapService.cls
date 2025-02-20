@@ -83,6 +83,7 @@ public class MnbSoapService {
             MnbSoapService.GetCurrentExchangeRatesResponseBody response_x;
             Map<String, MnbSoapService.GetCurrentExchangeRatesResponseBody> response_map_x = new Map<String, MnbSoapService.GetCurrentExchangeRatesResponseBody>();
             response_map_x.put('response_x', response_x);
+			if (!Test.isRunningTest())
             WebServiceCallout.invoke(
               this,
               request_x,
@@ -96,7 +97,7 @@ public class MnbSoapService {
               'MnbSoapService.GetCurrentExchangeRatesResponseBody'}
             );
             response_x = response_map_x.get('response_x');
-            return response_x.GetCurrentExchangeRatesResult;
+            return response_x?.GetCurrentExchangeRatesResult;
         }
         public String GetCurrencyUnits(String currencyNames) {
             MnbSoapService.GetCurrencyUnitsRequestBody request_x = new MnbSoapService.GetCurrencyUnitsRequestBody();
