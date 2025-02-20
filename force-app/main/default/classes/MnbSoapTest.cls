@@ -17,12 +17,20 @@ private class MnbSoapTest {
 	}
 
 	@IsTest
-	static void testBehavior() {
+	static void testScheduledExecute() {
 		Test.setMock(HttpCalloutMock.class, new mock());
 
 		MnbSoapSchedulable schedulable = new MnbSoapSchedulable();
 		Test.startTest();
 		schedulable.execute(null);
 		Test.stopTest();
+	}
+
+	@IsTest static void testGetCurrencies() {
+		Test.setMock(HttpCalloutMock.class, new mock());
+
+		MnbSoapService.CustomBinding_MNBArfolyamServiceSoap instance = new MnbSoapService.CustomBinding_MNBArfolyamServiceSoap();
+		instance.GetCurrencies();
+		instance.GetCurrentExchangeRates();
 	}
 }

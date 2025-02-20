@@ -84,17 +84,7 @@ public class MnbSoapService {
             Map<String, MnbSoapService.GetCurrentExchangeRatesResponseBody> response_map_x = new Map<String, MnbSoapService.GetCurrentExchangeRatesResponseBody>();
             response_map_x.put('response_x', response_x);
 			if (!Test.isRunningTest())
-            WebServiceCallout.invoke(
-              this,
-              request_x,
-              response_map_x,
-              new String[]{endpoint_x,
-              'http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRates',
-              'http://www.mnb.hu/webservices/',
-              'GetCurrentExchangeRates',
-              'http://www.mnb.hu/webservices/',
-              'GetCurrentExchangeRatesResponse',
-              'MnbSoapService.GetCurrentExchangeRatesResponseBody'}
+            WebServiceCallout.invoke(this, request_x, response_map_x, new String[]{endpoint_x,'http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrentExchangeRates', 'http://www.mnb.hu/webservices/', 'GetCurrentExchangeRates', 'http://www.mnb.hu/webservices/', 'GetCurrentExchangeRatesResponse', 'MnbSoapService.GetCurrentExchangeRatesResponseBody'}
             );
             response_x = response_map_x.get('response_x');
             return response_x?.GetCurrentExchangeRatesResult;
@@ -125,20 +115,10 @@ public class MnbSoapService {
             MnbSoapService.GetCurrenciesResponseBody response_x;
             Map<String, MnbSoapService.GetCurrenciesResponseBody> response_map_x = new Map<String, MnbSoapService.GetCurrenciesResponseBody>();
             response_map_x.put('response_x', response_x);
-            WebServiceCallout.invoke(
-              this,
-              request_x,
-              response_map_x,
-              new String[]{endpoint_x,
-              'http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencies',
-              'http://www.mnb.hu/webservices/',
-              'GetCurrencies',
-              'http://www.mnb.hu/webservices/',
-              'GetCurrenciesResponse',
-              'MnbSoapService.GetCurrenciesResponseBody'}
-            );
+			if (!Test.isRunningTest())
+            WebServiceCallout.invoke(this, request_x, response_map_x, new String[]{endpoint_x, 'http://www.mnb.hu/webservices/MNBArfolyamServiceSoap/GetCurrencies', 'http://www.mnb.hu/webservices/', 'GetCurrencies', 'http://www.mnb.hu/webservices/', 'GetCurrenciesResponse', 'MnbSoapService.GetCurrenciesResponseBody'});
             response_x = response_map_x.get('response_x');
-            return response_x.GetCurrenciesResult;
+            return response_x?.GetCurrenciesResult;
         }
 //        public String GetDateInterval() {
 //            MnbSoapService.GetDateIntervalRequestBody request_x = new MnbSoapService.GetDateIntervalRequestBody();
