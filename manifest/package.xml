@@ -36,6 +36,7 @@
         <members>AI_Setting__mdt</members>
         <members>Google_Credential__mdt</members>
         <members>MNB_Currency_Rate__c</members>
+        <members>bear_Org_Information__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -43,6 +44,10 @@
     </types>
     <types>
         <name>ListView</name>
+    </types>
+    <types>
+        <members>bear_Org_Information.bear_Actual_Org_Information</members>
+        <name>CustomMetadata</name>
     </types>
     <version>62.0</version>
 </Package>
