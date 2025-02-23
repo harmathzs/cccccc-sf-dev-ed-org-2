@@ -38,6 +38,8 @@
         <members>MNB_Currency_Rate__c</members>
         <members>bear_Org_Information__mdt</members>
         <members>Contact</members>
+        <members>Account</members>
+        <members>User</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -75,6 +77,98 @@
         <members>Contact.ReportsToId</members>
         <members>Contact.Title</members>
         <members>Contact.bear_Bear_Role__c</members>
+        <members>Account.AccountNumber</members>
+        <members>Account.AccountSource</members>
+        <members>Account.Active__c</members>
+        <members>Account.AnnualRevenue</members>
+        <members>Account.BillingAddress</members>
+        <members>Account.ChannelProgramLevelName</members>
+        <members>Account.ChannelProgramName</members>
+        <members>Account.CleanStatus</members>
+        <members>Account.CustomerPriority__c</members>
+        <members>Account.DandbCompanyId</members>
+        <members>Account.Description</members>
+        <members>Account.Description_Rich_Text__c</members>
+        <members>Account.DunsNumber</members>
+        <members>Account.Fax</members>
+        <members>Account.Industry</members>
+        <members>Account.IsCustomerPortal</members>
+        <members>Account.IsPartner</members>
+        <members>Account.Jigsaw</members>
+        <members>Account.NaicsCode</members>
+        <members>Account.NaicsDesc</members>
+        <members>Account.Name</members>
+        <members>Account.NumberOfEmployees</members>
+        <members>Account.NumberofLocations__c</members>
+        <members>Account.OperatingHoursId</members>
+        <members>Account.OwnerId</members>
+        <members>Account.Ownership</members>
+        <members>Account.ParentId</members>
+        <members>Account.Phone</members>
+        <members>Account.Rating</members>
+        <members>Account.SLAExpirationDate__c</members>
+        <members>Account.SLASerialNumber__c</members>
+        <members>Account.SLA__c</members>
+        <members>Account.ShippingAddress</members>
+        <members>Account.Sic</members>
+        <members>Account.SicDesc</members>
+        <members>Account.Site</members>
+        <members>Account.TickerSymbol</members>
+        <members>Account.Tier</members>
+        <members>Account.Tradestyle</members>
+        <members>Account.Type</members>
+        <members>Account.UpsellOpportunity__c</members>
+        <members>Account.Website</members>
+        <members>Account.YearStarted</members>
+        <members>User.AboutMe</members>
+        <members>User.Address</members>
+        <members>User.Alias</members>
+        <members>User.CallCenterId</members>
+        <members>User.CommunityNickname</members>
+        <members>User.CompanyName</members>
+        <members>User.ContactId</members>
+        <members>User.DefaultGroupNotificationFrequency</members>
+        <members>User.DelegatedApproverId</members>
+        <members>User.Department</members>
+        <members>User.DigestFrequency</members>
+        <members>User.Division</members>
+        <members>User.Email</members>
+        <members>User.EmailEncodingKey</members>
+        <members>User.EmployeeNumber</members>
+        <members>User.EndDay</members>
+        <members>User.Extension</members>
+        <members>User.Fax</members>
+        <members>User.FederationIdentifier</members>
+        <members>User.ForecastEnabled</members>
+        <members>User.IndividualId</members>
+        <members>User.IsActive</members>
+        <members>User.IsSystemControlled</members>
+        <members>User.JigsawImportLimitOverride</members>
+        <members>User.LanguageLocaleKey</members>
+        <members>User.LocaleSidKey</members>
+        <members>User.ManagerId</members>
+        <members>User.MobilePhone</members>
+        <members>User.Name</members>
+        <members>User.Phone</members>
+        <members>User.PortalRole</members>
+        <members>User.ProfileId</members>
+        <members>User.ReceivesAdminInfoEmails</members>
+        <members>User.ReceivesInfoEmails</members>
+        <members>User.SenderEmail</members>
+        <members>User.SenderName</members>
+        <members>User.Signature</members>
+        <members>User.StartDay</members>
+        <members>User.StayInTouchNote</members>
+        <members>User.StayInTouchSignature</members>
+        <members>User.StayInTouchSubject</members>
+        <members>User.TimeZoneSidKey</members>
+        <members>User.Title</members>
+        <members>User.UserRoleId</members>
+        <members>User.UserSubtype</members>
+        <members>User.Username</members>
+        <members>User.WorkspaceId</members>
+        <members>User.sf_devops__Bitbucket_Primary_Email_Address__c</members>
+        <members>User.sf_devops__GitHub_Primary_Email_Address__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -83,6 +177,28 @@
     <types>
         <members>bear_Org_Information.bear_Actual_Org_Information</members>
         <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>Bear_Site</members>
+        <name>CustomSite</name>
+    </types>
+    <types>
+        <name>FieldSet</name>
+    </types>
+    <types>
+        <members>External Identity User</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>bear_Experience_Cloud_Role</members>
+        <name>Role</name>
+    </types>
+    <types>
+        <members>Bear_Site1</members>
+        <name>SiteDotCom</name>
+    </types>
+    <types>
+        <name>WebLink</name>
     </types>
     <version>62.0</version>
 </Package>
