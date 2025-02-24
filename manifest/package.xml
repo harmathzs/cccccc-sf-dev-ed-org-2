@@ -40,6 +40,11 @@
         <members>Contact</members>
         <members>Account</members>
         <members>User</members>
+        <members>Activity</members>
+        <members>Task</members>
+        <members>bear_Course_Student_Junction__c</members>
+        <members>bear_Course__c</members>
+        <members>bear_Student_Task_Junction__c</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -199,6 +204,12 @@
     </types>
     <types>
         <name>WebLink</name>
+    </types>
+    <types>
+        <members>bear_Course_Student_Junction__c</members>
+        <members>bear_Course__c</members>
+        <members>bear_Student_Task_Junction__c</members>
+        <name>CustomTab</name>
     </types>
     <version>62.0</version>
 </Package>
