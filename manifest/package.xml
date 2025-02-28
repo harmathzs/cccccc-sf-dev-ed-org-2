@@ -34,15 +34,56 @@
     </types>
     <types>
         <members>AI_Setting__mdt</members>
+        <members>Account</members>
+        <members>Activity</members>
+        <members>Contact</members>
         <members>Google_Credential__mdt</members>
         <members>MNB_Currency_Rate__c</members>
+        <members>Task</members>
+        <members>User</members>
+        <members>bear_Course_Student_Junction__c</members>
+        <members>bear_Course__c</members>
+        <members>bear_Org_Information__mdt</members>
+        <members>bear_Student_Task_Junction__c</members>
         <name>CustomObject</name>
     </types>
     <types>
         <name>CustomField</name>
     </types>
     <types>
+        <members>bear_Org_Information.bear_Actual_Org_Information</members>
+        <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>Bear_Site</members>
+        <name>CustomSite</name>
+    </types>
+    <types>
+        <members>bear_Course_Student_Junction__c</members>
+        <members>bear_Course__c</members>
+        <members>bear_Student_Task_Junction__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <name>FieldSet</name>
+    </types>
+    <types>
         <name>ListView</name>
+    </types>
+    <types>
+        <members>External Identity User</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>bear_Experience_Cloud_Role</members>
+        <name>Role</name>
+    </types>
+    <types>
+        <members>Bear_Site1</members>
+        <name>SiteDotCom</name>
+    </types>
+    <types>
+        <name>WebLink</name>
     </types>
     <version>62.0</version>
 </Package>
