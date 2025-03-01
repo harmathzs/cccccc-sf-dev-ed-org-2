@@ -11,6 +11,7 @@ public with sharing class MetadataCollectorFieldsBatchable implements Database.B
 				,Entity_Type__c
 				,Picklist_Values__c
 			FROM Saved_Metadata_Entry__c
+			WHERE Entity_Type__c = 'SObject'
 		]);
 	}
 

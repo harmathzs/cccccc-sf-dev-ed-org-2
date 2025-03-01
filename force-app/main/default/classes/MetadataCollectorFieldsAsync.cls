@@ -10,6 +10,7 @@ public with sharing class MetadataCollectorFieldsAsync implements Queueable {
 	}
 
 	public void execute(QueueableContext context) {
+		// TODO - smes are all Sobjects, now is the time to list their fields and picklist values if any exist
 
 	}
 }
