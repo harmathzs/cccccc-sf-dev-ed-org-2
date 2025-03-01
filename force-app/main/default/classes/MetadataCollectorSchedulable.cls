@@ -3,27 +3,29 @@
  */
 
 public with sharing class MetadataCollectorSchedulable implements Schedulable {
-	public Saved_Metadata_Entry__c[] savedMetadataEntries {get; set;}
+	public Saved_Metadata_Entry__c[] savedSobjectEntries {get; set;}
 
 	public void execute(SchedulableContext context) {
-		savedMetadataEntries = new List<Saved_Metadata_Entry__c>();
+		savedSobjectEntries = new List<Saved_Metadata_Entry__c>();
 
 		// Collect SObjects
 		Map<String, SObjectType> globalDescribe = Schema.getGlobalDescribe();
 		Set<String> sobjectNames = globalDescribe.keySet();
 
 		for (String sobjectName: sobjectNames) {
-			Saved_Metadata_Entry__c savedMetadataEntry = new Saved_Metadata_Entry__c(
+			Saved_Metadata_Entry__c savedSobjectEntry = new Saved_Metadata_Entry__c(
 				Entity_Name__c = sobjectName,
 				Entity_Type__c = 'SObject',
 				SObject_Name__c = sobjectName
 			);
-			savedMetadataEntry.Unique_Key__c = savedMetadataEntry.SObject_Name__c + ' - ' + savedMetadataEntry.Entity_Name__c;
-			savedMetadataEntries.add(savedMetadataEntry);
+			savedSobjectEntry.Unique_Key__c = savedSobjectEntry.SObject_Name__c + ' - ' + savedSobjectEntry.Entity_Name__c;
+			savedSobjectEntries.add(savedSobjectEntry);
 		}
 
-		// Collect Fields
+		upsert savedSobjectEntries Unique_Key__c;
 
-		upsert savedMetadataEntries Unique_Key__c;
+		// Collect Fields
+		// TODO - launch batch on the above SObjects
+
 	}
 }
