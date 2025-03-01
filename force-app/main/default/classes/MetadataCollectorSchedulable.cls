@@ -27,5 +27,7 @@ public with sharing class MetadataCollectorSchedulable implements Schedulable {
 		// Collect Fields
 		// TODO - launch batch on the above SObjects
 
+		MetadataCollectorFieldsBatchable batch = new MetadataCollectorFieldsBatchable();
+		String jobId = Database.executeBatch(batch, 10);
 	}
 }
