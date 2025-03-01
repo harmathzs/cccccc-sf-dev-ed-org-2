@@ -18,11 +18,12 @@ public with sharing class MetadataCollectorSchedulable implements Schedulable {
 				Entity_Type__c = 'SObject',
 				SObject_Name__c = sobjectName
 			);
+			savedMetadataEntry.Unique_Key__c = savedMetadataEntry.SObject_Name__c + ' - ' + savedMetadataEntry.Entity_Name__c;
 			savedMetadataEntries.add(savedMetadataEntry);
 		}
 
 		// Collect Fields
 
-		//upsert savedMetadataEntries;
+		upsert savedMetadataEntries Unique_Key__c;
 	}
 }
