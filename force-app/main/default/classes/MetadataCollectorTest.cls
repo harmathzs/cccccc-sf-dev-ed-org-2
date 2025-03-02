@@ -6,5 +6,7 @@
 private class MetadataCollectorTest {
 	@IsTest
 	static void testBehavior() {
+		MetadataCollectorSchedulable schedulable = new MetadataCollectorSchedulable();
+		schedulable.execute(null);
 	}
 }

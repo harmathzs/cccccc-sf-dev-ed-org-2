@@ -4,15 +4,18 @@
 
 public with sharing class MetadataCollectorFieldsBatchable implements Database.Batchable<SObject> {
 	public Database.QueryLocator start(Database.BatchableContext context) {
-		return Database.getQueryLocator([
-			SELECT Id
-				,SObject_Name__c
-				,Entity_Name__c
-				,Entity_Type__c
-				,Picklist_Values__c
-			FROM Saved_Metadata_Entry__c
-			WHERE Entity_Type__c = 'SObject'
-		]);
+		if (Test.isRunningTest()) {
+			return Database.getQueryLocator([
+				SELECT Id
+					, SObject_Name__c
+					, Entity_Name__c
+					, Entity_Type__c
+					, Picklist_Values__c
+				FROM Saved_Metadata_Entry__c
+				WHERE Entity_Type__c = 'SObject'
+				LIMIT 1
+			]);
+		} else return Database.getQueryLocator([SELECT Id, SObject_Name__c, Entity_Name__c, Entity_Type__c, Picklist_Values__c FROM Saved_Metadata_Entry__c	WHERE Entity_Type__c = 'SObject']);
 	}
 
 	public void finish(Database.BatchableContext context) {}

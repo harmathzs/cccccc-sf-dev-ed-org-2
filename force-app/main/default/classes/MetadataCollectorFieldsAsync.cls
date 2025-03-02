@@ -3,10 +3,10 @@
  */
 
 public with sharing class MetadataCollectorFieldsAsync implements Queueable {
-	public List<Saved_Metadata_Entry__c> smes {get; set;}
+	public List<Saved_Metadata_Entry__c> sobjectsSMEs {get; set;}
 
-	public MetadataCollectorFieldsAsync(List<Saved_Metadata_Entry__c> smes) {
-		this.smes = smes;
+	public MetadataCollectorFieldsAsync(List<Saved_Metadata_Entry__c> sobjectsSMEs) {
+		this.sobjectsSMEs = sobjectsSMEs;
 	}
 
 	public void execute(QueueableContext context) {
