@@ -47,13 +47,15 @@ public with sharing class MetadataCollectorFieldsAsync implements Queueable {
 					fieldsSME.Entity_Type__c = 'Picklist Field';
 					String[] joinableValues = new List<String>();
 					List<Schema.PicklistEntry> picklistValues = fieldDescribe.getPicklistValues();
+					Integer i=0;
 					for (Schema.PicklistEntry ple : picklistValues) {
+						i++;
 						String value = ple.getValue();
-						joinableValues.add(value);
+						if (i<3) joinableValues.add(value);
 						String label = ple.getLabel();
 						Boolean isActive = ple.isActive();
 					}
-					fieldsSME.Picklist_Values__c = String.join(joinableValues, ',');
+					fieldsSME.Picklist_Values__c = String.join(joinableValues, ',')+' and maybe some more values ... ';
 				} else {
 					fieldsSME.Entity_Type__c = 'Non-picklist Field';
 				}
