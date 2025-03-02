@@ -4,13 +4,16 @@
 
 public with sharing class MetadataCollectorFieldsAsync implements Queueable {
 	public List<Saved_Metadata_Entry__c> sobjectsSMEs { get; set; }
+	public List<Saved_Metadata_Entry__c> fieldssSMEs { get; set; }
 
 	public MetadataCollectorFieldsAsync(List<Saved_Metadata_Entry__c> sobjectsSMEs) {
 		this.sobjectsSMEs = sobjectsSMEs;
 	}
 
 	public void execute(QueueableContext context) {
-		// TODO - sobjectsSMEs are all Sobjects, now is the time to list their fields and picklist values if any exist
+		// sobjectsSMEs are all Sobjects, now is the time to list their fields and picklist values if any exist
+
+		fieldssSMEs = new List<Saved_Metadata_Entry__c>();
 
 		for (Saved_Metadata_Entry__c sobjectSME : sobjectsSMEs) {
 			String sobjectName = sobjectSME.Entity_Name__c;
@@ -31,6 +34,9 @@ public with sharing class MetadataCollectorFieldsAsync implements Queueable {
 				Boolean isCustom = fieldDescribe.isCustom();
 				Boolean isRequired = fieldDescribe.isNillable();
 				Integer length = fieldDescribe.getLength();
+
+				// TODO - store field
+
 
 				// For picklist fields, get values
 				if (fieldDescribe.getType() == Schema.DisplayType.PICKLIST) {
