@@ -25,6 +25,8 @@ public with sharing class MetadataCollectorFieldsAsync implements Queueable {
 
 			// Iterate through fields to get metadata
 			for (String fieldName : fieldMap.keySet()) {
+				Saved_Metadata_Entry__c fieldsSME = new Saved_Metadata_Entry__c();
+
 				Schema.DescribeFieldResult fieldDescribe = fieldMap.get(fieldName).getDescribe();
 
 				// Get field properties
@@ -35,19 +37,31 @@ public with sharing class MetadataCollectorFieldsAsync implements Queueable {
 				Boolean isRequired = fieldDescribe.isNillable();
 				Integer length = fieldDescribe.getLength();
 
-				// TODO - store field
-
+				// Store field
+				fieldsSME.SObject_Name__c = sobjectName;
+				fieldsSME.Entity_Name__c = api;
+				fieldsSME.Unique_Key__c = fieldsSME.SObject_Name__c + ' - ' + fieldsSME.Entity_Name__c;
 
 				// For picklist fields, get values
 				if (fieldDescribe.getType() == Schema.DisplayType.PICKLIST) {
+					fieldsSME.Entity_Type__c = 'Picklist Field';
+					String[] joinableValues = new List<String>();
 					List<Schema.PicklistEntry> picklistValues = fieldDescribe.getPicklistValues();
 					for (Schema.PicklistEntry ple : picklistValues) {
 						String value = ple.getValue();
+						joinableValues.add(value);
 						String label = ple.getLabel();
 						Boolean isActive = ple.isActive();
 					}
+					fieldsSME.Picklist_Values__c = String.join(joinableValues, ',');
+				} else {
+					fieldsSME.Entity_Type__c = 'Non-picklist Field';
 				}
+
+				fieldssSMEs.add(fieldsSME);
 			}
 		}
+
+		upsert fieldssSMEs Unique_Key__c;
 	}
 }
