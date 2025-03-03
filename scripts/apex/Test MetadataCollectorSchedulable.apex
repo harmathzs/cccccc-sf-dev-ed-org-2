@@ -1,6 +1,6 @@
 // Test MetadataCollectorSchedulable
 
-MetadataCollectorSchedulable collector = new MetadataCollectorSchedulable(5);
+MetadataCollectorSchedulable collector = new MetadataCollectorSchedulable(2);
 
 collector.execute(null);
 
