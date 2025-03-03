@@ -3,6 +3,11 @@
  */
 
 public with sharing class MetadataCollectorSchedulable implements Schedulable {
+	public Integer sobjectLimit {get; set;}
+	public MetadataCollectorSchedulable(Integer sobjectLimit) {
+		this.sobjectLimit = sobjectLimit;
+	}
+
 	public Saved_Metadata_Entry__c[] savedSobjectEntries {get; set;}
 
 	public void execute(SchedulableContext context) {
@@ -27,7 +32,7 @@ public with sharing class MetadataCollectorSchedulable implements Schedulable {
 		// Collect Fields
 		// TODO - launch batch on the above SObjects
 
-		MetadataCollectorFieldsBatchable batch = new MetadataCollectorFieldsBatchable();
+		MetadataCollectorFieldsBatchable batch = new MetadataCollectorFieldsBatchable(sobjectLimit);
 		String jobId = Database.executeBatch(batch, 10);
 	}
 }
