@@ -45,6 +45,7 @@
         <members>bear_Course__c</members>
         <members>bear_Org_Information__mdt</members>
         <members>bear_Student_Task_Junction__c</members>
+        <members>Saved_Metadata_Entry__c</members>
         <name>CustomObject</name>
     </types>
     <types>

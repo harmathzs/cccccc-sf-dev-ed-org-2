@@ -1,0 +1,4 @@
+/* Count SMEs */
+
+SELECT COUNT()
+FROM Saved_Metadata_Entry__c
